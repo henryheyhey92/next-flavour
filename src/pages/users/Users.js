@@ -1,4 +1,7 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios';
+
+const BASE_URL = "https://3001-henryheyhey-espressoexp-1blfs1n110r.ws-us44.gitpod.io/"
 
 export default function Users() {
 
@@ -6,11 +9,27 @@ export default function Users() {
         email: "",
         password: ""
     })
+    const [response, setResponse] = useState(null);
     
     const onUpdateFormField = (e) => setUser({
         ...userInfo,
         [e.target.name]: e.target.value
     })
+
+
+    useEffect(() => {}, [response])
+
+    const login = async () => {
+        console.log("works")
+        let data = {
+            "email": userInfo.email,
+            "password": userInfo.password
+        }
+        let result = await axios.post(BASE_URL+"api/users/login", data);
+        console.log(result);
+        setResponse(result);
+    }
+
 
     return (
         <React.Fragment>
@@ -42,7 +61,8 @@ export default function Users() {
                     <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button onClick={login} 
+                        class="btn btn-primary">Submit</button>
             </form>
         </React.Fragment>
 

@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Bean-Flavour
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Summary
 
-## Available Scripts
+**Project Context**
 
-In the project directory, you can run:
+Bean Flavour is a mobile-responsive Ecommerce web application that allows users to purchase local sg branded flavour coffee bean. Users can sign up account with Bean-flavour coffee, add items to chart, checkout item and do online payment. 
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Organisational Goals**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app aims to promote local brand coffee products and provide service that allows users to search and purchase. For the product owner, it would be a system for them to keep track of item stocks, number of purchases and transaction history.
 
-### `npm test`
+**User Goals**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Able to look for the desire coffee products, order, add to cart and online payment.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## UI/UX
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **Strategy**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+_Organisation_
+* objective: display coffee products catalogue, allow to user to purchase products made by the organsation from online store and make profit out from it
 
-### `npm run eject`
+_User_
+* objective: search coffee products that suits the user, able to order and purchase items from the online store.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+_Pain Point_
+* unable to find high quality, certified coffee bean or coffee products that are made by local brands in the market
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+User stories | Acceptance Criteria
+-------------|--------------------
+As a user, I would like to see all the available product name, price and image, so that I know what are product that I can purchase from the web store. | retrieve product information from database
+As a user, I want the website to be able to search products by name, type etc, so that I will only retrieve product information that are only related to my search input. | search feature
+As a user, I would like to do payment online and through credit card, so that I do not require to do payment in cheque or cash | feature that allows payment to be make online
+As a user, I would like to see my cart item, so that I can know what are the items that I have added to the shopping cart | feature that can display can display cart items
+As a user, I would like to see my purchase history, so that I can know what are the items I have purchased and how much money I spent | feature that can display the shopping/purchase history 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### **Scope**
+_Functional Specifications_
 
-## Learn More
+* Able to search for coffee products by name, type and price etc
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Able to add item to cart
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Able to place order
 
-### Code Splitting
+* Able to make payment online
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+_Non-functional requirments_ 
+* Mobile responsiveness
 
-### Analyzing the Bundle Size
+* Performance
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### **Structure**
 
-### Making a Progressive Web App
+*
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### **Skeleton**
 
-### Advanced Configuration
+Wireframes for mobile, desktop version
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[https://henry358751.invisionapp.com/homepage?tid=10386126](https://henry358751.invisionapp.com/homepage?tid=10386126)
 
-### Deployment
+### **Surface**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

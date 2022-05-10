@@ -1,23 +1,31 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router-dom';
+
 
 const BASE_URL = "https://3001-henryheyhey-espressoexp-1blfs1n110r.ws-us44.gitpod.io/"
 
-export default function Users() {
+let accessToken = null;
+let refreshToken = null;
 
+export default function Users() {
+    const navigate = new useNavigate;
     const [userInfo, setUser] = useState({
         email: "",
         password: ""
     })
     const [response, setResponse] = useState(null);
-    
+
     const onUpdateFormField = (e) => setUser({
         ...userInfo,
         [e.target.name]: e.target.value
     })
 
 
-    useEffect(() => {}, [response])
+    // useEffect(() => { }, [response])
 
     const login = async () => {
         console.log("works")
@@ -25,45 +33,51 @@ export default function Users() {
             "email": userInfo.email,
             "password": userInfo.password
         }
-        let result = await axios.post(BASE_URL+"api/users/login", data);
-        console.log(result);
-        setResponse(result);
+        let response = await axios.post(BASE_URL + "api/users/login", data);
+        accessToken = response.data.accessToken;
+        refreshToken = response.data.refreshToken;
+        navigate("/Profile");  //it will navigate to the profile page
+        // setResponse(result);
     }
 
 
     return (
         <React.Fragment>
             <h1>Users Login page</h1>
-            <form className='m-5'>
-                <div className="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" 
-                            className="form-control" 
-                            id="exampleInputEmail1" 
-                            aria-describedby="emailHelp" 
-                            placeholder="Enter email"
-                            name="email"
-                            value={userInfo.email}
-                            onChange={onUpdateFormField}/>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" 
-                            class="form-control" 
-                            id="exampleInputPassword1" 
-                            placeholder="Password" 
-                            name="password" 
-                            value={userInfo.password}
-                            onChange={onUpdateFormField}/>
-                </div>
-                <div className="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button onClick={login} 
-                        class="btn btn-primary">Submit</button>
-            </form>
+            <Box
+                sx={{
+                    m: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    minWdith: "sx"
+                }}
+            >
+                <TextField id="url-name"
+                    label="Email"
+                    variant="outlined"
+                    name='email'
+                    value={userInfo.email}
+                    onChange={onUpdateFormField}
+                    className="textfield-image-url"
+                    helperText
+                />
+
+                <TextField id="Artwork-name"
+                    label="Password"
+                    variant="outlined"
+                    name='password'
+                    value={userInfo.password}
+                    onChange={onUpdateFormField}
+                    className="textfield-style"
+                    type="text"
+                    helperText
+                />
+            </Box>
+            <Button onClick={login}>login</Button>
+            {/* <Routes>
+                <Route path="/Profile" element={<Profile />} />
+            </Routes> */}
         </React.Fragment>
 
     )

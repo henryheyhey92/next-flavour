@@ -3,6 +3,7 @@ import Cart from './pages/cart/Cart';
 import Landing from './pages/landing/Landing';
 import Products from './pages/products/Products'
 import Users from './pages/users/Users';
+import Profile from './pages/users/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -70,6 +71,8 @@ function App() {
 
         {/* Users route */}
         <Route path="/users" element={<Users />} />
+
+        <Route path="/Profile" element={<Profile/>} />
       </Routes>
     </Router>
   );

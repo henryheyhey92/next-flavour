@@ -1,43 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import React, { useEffect, useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
+import UsersContext from '../../contexts/UsersContext';
 
 
 const BASE_URL = "https://3001-henryheyhey-espressoexp-1blfs1n110r.ws-us44.gitpod.io/"
 
-let accessToken = null;
-let refreshToken = null;
+export default function Users(props) {
+    const navigate = new useNavigate();
+    let context = useContext(UsersContext);
 
-export default function Users() {
-    const navigate = new useNavigate;
+    let temp = {}
     const [userInfo, setUser] = useState({
         email: "",
         password: ""
     })
-    const [response, setResponse] = useState(null);
+
+    const [logIn, setLogin] = useState(false);
+    
 
     const onUpdateFormField = (e) => setUser({
         ...userInfo,
         [e.target.name]: e.target.value
     })
 
-
-    // useEffect(() => { }, [response])
+    
 
     const login = async () => {
-        console.log("works")
-        let data = {
-            "email": userInfo.email,
-            "password": userInfo.password
+        let result = await context.login(userInfo.email, userInfo.password);
+        console.log(result);
+        setLogin(true);
+        if(result){
+            navigate('/Profile')
         }
-        let response = await axios.post(BASE_URL + "api/users/login", data);
-        accessToken = response.data.accessToken;
-        refreshToken = response.data.refreshToken;
-        navigate("/Profile");  //it will navigate to the profile page
-        // setResponse(result);
+    }
+        
+
+
+    const logout = async () => {
+        let result = await context.logout()
+        console.log(result);
+        setLogin(false);
     }
 
 
@@ -75,9 +80,7 @@ export default function Users() {
                 />
             </Box>
             <Button onClick={login}>login</Button>
-            {/* <Routes>
-                <Route path="/Profile" element={<Profile />} />
-            </Routes> */}
+            <Button onClick={logout}>logout</Button>
         </React.Fragment>
 
     )

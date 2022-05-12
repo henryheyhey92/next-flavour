@@ -4,43 +4,17 @@ import Landing from './pages/landing/Landing';
 import Products from './pages/products/Products'
 import Users from './pages/users/Users';
 import Profile from './pages/users/Profile';
+import Navbar from './Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import UsersProvider from "./contexts/UsersProvider";
+import React from "react";
 
 
 
 function App() {
   return (
     <Router>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">Next flavour</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Landing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/cart">Cart</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/products">Products</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            {/* <a href="/cart" class="ml-3 btn btn-primary btn-sm">Cart</a> */}
-
-            {/* <a href="/logout" class="ml-3 btn btn-primary btn-sm">Logout</a> */}
-
-            <a href="/" class="ml-3 btn btn-primary btn-sm">Login</a>
-  
-
-          </div>
-        </div>
-      </nav>
+      <Navbar />
       <nav>
         <ul>
           <li>
@@ -58,22 +32,19 @@ function App() {
 
         </ul>
       </nav>
-      <Routes>
-        {/* Landing route */}
-        <Route path="/" element={<Landing />} />
-
-        {/* Cart route */}
-        <Route path="/cart" element={<Cart />} />
-
-
-        {/* Contact Us route */}
-        <Route path="/products" element={<Products />} />
-
-        {/* Users route */}
-        <Route path="/users" element={<Users />} />
-
-        <Route path="/Profile" element={<Profile/>} />
-      </Routes>
+      <UsersProvider>
+        <Routes>
+          {/* Landing route */}
+          <Route path="/" element={<Landing />} />
+          {/* Users route */}
+          <Route path="/users" element={<Users />} />
+          {/* Cart route */}
+          <Route path="/cart" element={<Cart />} />
+          {/* Contact Us route */}
+          <Route path="/products" element={<Products />} />
+          <Route path="/Profile" element={<Profile />} />
+        </Routes>
+      </UsersProvider>
     </Router>
   );
 }

@@ -8,6 +8,7 @@ export default function UsersProvider(props) {
    
     const [userProfile, setUserProfile] = useState({});
     const [logIn, setLogIn] = useState(false);
+    const [product, setProduct] = useState([]);
 
     const context = {
         login: async (email, password) => {
@@ -64,6 +65,13 @@ export default function UsersProvider(props) {
                 return false; //no refresh token
             }
 
+        },
+        product: async () => {
+            let response = await axios.get(BASE_URL + 'api/products');
+            setProduct(response.data);
+            if(response.data){
+                return response.data
+            }
         }
 
     }

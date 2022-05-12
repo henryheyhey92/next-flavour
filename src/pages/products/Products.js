@@ -37,15 +37,15 @@ export default function Products() {
             <Row xs={1} md={3} className="g-3">
                 {product.map((p, idx) => (
                     <Col>
-                        <Card className="rounded-0">
-                            {/* <Link to={"/products/" + p.id} className="text-decoration-none text-reset"> */}
+                        <Card className="rounded-0" key={p.id}>
+                            <Link to={"/" + p.id} className="text-decoration-none text-reset">
                                 <Card.Img className="rounded-0" variant="top" src={p.image_url} />
                                 <Card.Body>
                                     <Card.Text className="lead fs-5" >
                                         {p.product_name} ({p.description})
                                     </Card.Text>
                                 </Card.Body>
-                            {/* </Link> */}
+                            </Link>
                             <><Button variant="dark" className="lead fs-5 rounded-0">Add to Cart</Button>{' '}</>
                         </Card>
                     </Col>

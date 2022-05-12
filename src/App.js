@@ -8,31 +8,36 @@ import Navbar from './Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import UsersProvider from "./contexts/UsersProvider";
 import React from "react";
+import NavbarBootStrap from "./NavbarBootStrap";
 
 
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Landing</Link>
-          </li>
-          <li>
-            <Link to="/cart">Cart</Link>
-          </li>
-          <li>
-            <Link to="/products">Products</Link>
-          </li>
-          <li>
-            <Link to="/users">Users</Link>
-          </li>
+    <UsersProvider>
+      
+      {/* <NavbarBootStrap /> */}
+      <Router>
+      <NavbarBootStrap />
+      {/* <Navbar /> */}
+        {/* <nav>
+          <ul>
+            <li>
+              <Link to="/">Landing</Link>
+            </li>
+            <li>
+              <Link to="/cart">Cart</Link>
+            </li>
+            <li>
+              <Link to="/products">Products</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
 
-        </ul>
-      </nav>
-      <UsersProvider>
+          </ul>
+        </nav> */}
+
         <Routes>
           {/* Landing route */}
           <Route path="/" element={<Landing />} />
@@ -44,8 +49,9 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/Profile" element={<Profile />} />
         </Routes>
-      </UsersProvider>
-    </Router>
+
+      </Router>
+    </UsersProvider>
   );
 }
 

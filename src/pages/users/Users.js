@@ -12,7 +12,6 @@ export default function Users(props) {
     const navigate = new useNavigate();
     let context = useContext(UsersContext);
 
-    let temp = {}
     const [userInfo, setUser] = useState({
         email: "",
         password: ""

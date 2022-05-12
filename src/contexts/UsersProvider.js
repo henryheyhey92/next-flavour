@@ -39,7 +39,7 @@ export default function UsersProvider(props) {
             })
             if (response.data) {
                 setUserProfile(response.data);
-                return true;
+                return response.data;
             } else {
                 setUserProfile({})
                 return false;

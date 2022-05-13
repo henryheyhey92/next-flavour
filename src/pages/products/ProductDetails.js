@@ -5,7 +5,7 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 import UsersContext from '../../contexts/UsersContext';
 import axios from 'axios';
 
-const BASE_URL = "https://3001-henryheyhey-espressoexp-1blfs1n110r.ws-us44.gitpod.io/"
+const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 
 export default function ProductDetails() {

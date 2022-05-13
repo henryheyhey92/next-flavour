@@ -9,8 +9,8 @@ export default function Profile() {
 
     useEffect(()=> {
         const fetchProfile = async () => {
-            console.log("Use effect for profile works")
-            let response = await context.profile()
+            console.log("Use effect for profile works");
+            let response = await context.profile();
             setUserProfile(response);
             console.log(response);
         }

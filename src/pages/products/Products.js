@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 // import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 // import Card from '@mui/material/Card';
@@ -10,14 +10,16 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios'
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import UsersContext from '../../contexts/UsersContext';
 
-const BASE_URL = "https://3001-henryheyhey-espressoexp-1blfs1n110r.ws-us44.gitpod.io/"
+const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function Products() {
 
     //state
     const [product, setProduct] = useState([]);
-
+    const [addItem, setItem] = useState();
+    let context = useContext(UsersContext);
     //componment didmout
     useEffect(() => {
         const fetchProduct = async () => {
@@ -28,6 +30,36 @@ export default function Products() {
         fetchProduct()
     }, [])
 
+    useEffect(() => {
+
+    })
+
+    const addToCart = async (e) => {
+        console.log(e.target.value);
+        //Check if access token is expired or not
+        // true => your token is expired
+        // false => your token is not expired  
+        let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
+        if (!accessTokenNotExpired) {
+            //call the profile api or cart 
+            const headers = {
+                'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
+            }
+            const requestBodyData = {
+                "user_id": localStorage.getItem('userId'),
+                'product_id': e.target.value
+            }
+            let response = await axios.post(BASE_URL + "api/shoppingCart/additem", requestBodyData, { headers });
+
+            console.log("check add cart result whether is true");
+            console.log(response.data);
+        } else {
+            //need to prom for get new access token or ask user to sign in
+        }
+        // console.log(response);
+        // let response = await context.addToCart(e.target, value);
+        // console.log(response)
+    }
 
     return (
         <React.Fragment>
@@ -46,7 +78,11 @@ export default function Products() {
                                     </Card.Text>
                                 </Card.Body>
                             </Link>
-                            <><Button variant="dark" className="lead fs-5 rounded-0">Add to Cart</Button>{' '}</>
+                            <Button variant="dark"
+                                className="lead fs-5 rounded-0"
+                                value={p.id}
+                                onClick={addToCart}
+                            >Add to Cart</Button>
                         </Card>
                     </Col>
                 ))}

@@ -21,9 +21,7 @@ export default function NavbarBootStrap(props) {
                         </Nav>
                         <Nav>
                             <Nav.Link href="/users">Login</Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
-                                Cart
-                            </Nav.Link>
+                            <Nav.Link href="/cart">Cart</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -18,7 +18,6 @@ export default function Products() {
 
     //state
     const [product, setProduct] = useState([]);
-    const [addItem, setItem] = useState();
     let context = useContext(UsersContext);
     //componment didmout
     useEffect(() => {
@@ -36,9 +35,11 @@ export default function Products() {
 
     const addToCart = async (e) => {
         console.log(e.target.value);
+        let productId = e.target.value;
         //Check if access token is expired or not
         // true => your token is expired
         // false => your token is not expired  
+        console.log("Hello from addcart")
         let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
         if (!accessTokenNotExpired) {
             //call the profile api or cart 
@@ -55,6 +56,13 @@ export default function Products() {
             console.log(response.data);
         } else {
             //need to prom for get new access token or ask user to sign in
+            console.log("get new access token")
+           let result = await context.getRefreshToken();
+           if(result){
+               console.log("call add to cart")
+               addToCart(e);
+           }
+
         }
         // console.log(response);
         // let response = await context.addToCart(e.target, value);
@@ -71,8 +79,8 @@ export default function Products() {
                     <Col>
                         <Card className="rounded-0" key={p.id}>
                             <Link to={"/" + p.id} className="text-decoration-none text-reset">
-                                <Card.Img className="rounded-0" variant="top" src={p.image_url} />
-                                <Card.Body>
+                                <Card.Img className="rounded-0" variant="top" src={p.image_url} key={p.image_url}/>
+                                <Card.Body key={p.product_name}>
                                     <Card.Text className="lead fs-5" >
                                         {p.product_name} ({p.description})
                                     </Card.Text>

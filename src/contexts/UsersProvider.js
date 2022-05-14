@@ -78,29 +78,21 @@ export default function UsersProvider(props) {
         },
         //addItem to cart
         addToCart: async (itemId) => {
-            // let userId = {
-            //     'user_id': localStorage.getItem('userId')
-            // }
-            const userId = localStorage.getItem('userId');
-            console.log("user id");
-            console.log(userId);
-            const data = {
-                headers: {
-                    'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
-                
-                },
-                body: {
-                    "user_id": userId,
-                    'product_id': itemId
-                }
+            const headers = {
+                'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
             }
-            console.log("print header");
-            console.log(data);
+            const requestBodyData = {
+                "user_id": localStorage.getItem('userId'),
+                'product_id': itemId
+            }
+            let response = await axios.post(BASE_URL + "api/shoppingCart/additem", requestBodyData, { headers });
 
-            let response = await axios.post(BASE_URL + 'api/shoppingCart/addItem', data);
             setItem(response.data);
             if(response.data){
                 return response.data
+            }else{
+                //return no response data
+                return false
             }
 
         },
@@ -137,7 +129,18 @@ export default function UsersProvider(props) {
             }
         },
         getRefreshToken: async () => {
-
+            const requestBody = {
+                "refreshToken": localStorage.getItem('refreshToken')
+            }
+                let newAccessToken = await axios.post(BASE_URL + "api/users/refresh", requestBody)
+            if(newAccessToken){
+                localStorage.setItem('accessToken', newAccessToken.data.accessToken)
+                return true;
+            }else{
+                //return false when no new access token
+                return false
+            }
+            
         }
 
     }

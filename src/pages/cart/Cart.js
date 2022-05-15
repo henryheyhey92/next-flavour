@@ -85,12 +85,15 @@ export default function Cart() {
                                 sx={{ objectFit: "contain", height: 100, width: 100 }}
                                 image={e.product.image_url}
                                 alt="green iguana" />
-                            <CardContent sx={{ height: 100 }} key={e.product.product_name}>
+                            <CardContent sx={{ height: 200 }} key={e.product.product_name}>
                                 <Typography gutterBottom variant="h5" component="div">
                                     {e.product.product_name}
                                 </Typography>
-                                <Box sx={{ display: 'inline-flex' }}>
-                                    <Button sx={{ mr: 2 }}
+                                <Typography gutterBottom variant="h5" component="div">
+                                    inventory stock: {e.product.qty}
+                                </Typography>
+                                <Box sx={{ display: 'inline-flex' , m: 3}}>
+                                    <Button sx={{ mr: 1 }}
                                         variant="contained"
                                         size="small"
                                         onClick={decreaseQty}>-</Button>
@@ -102,17 +105,16 @@ export default function Cart() {
                                         value={e.quantity}
                                         onChange={onUpdateFormField}
                                     />
-                                    <Button sx={{ ml: 2 }}
+                                    <Button sx={{ ml: 1 }}
                                         variant="contained"
                                         size="small"
                                         onClick={increaseQty}>+</Button>
                                 </Box>
-
                                 <Typography sx={{ m: 2 }} variant="body2" color="text.secondary" component="div">
                                     {e.product.description}
                                 </Typography>
                             </CardContent>
-                            <CardActions sx={{ mt: 5 }} key={e.price}>
+                            <CardActions sx={{ mt: 2 }} key={e.price}>
                                 <Button variant="contained" size="small" value={e} onClick={() => {removeItemFromCart(e)}}>Remove item</Button>
                             </CardActions>
                         </Card>

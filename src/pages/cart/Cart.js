@@ -10,17 +10,22 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-
+import { headers } from '../../constant/Constants';
 const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 
 export default function Cart() {
 
     const [cartItems, setCartItems] = useState([]);
-    const [testItem, setTestItem] = useState([]);
+    const [removeCartItem, setRemoveItem] = useState();
+    const [qty, setItemQuantity] = useState({
+        quantity: ""
+    });
     const userId = localStorage.getItem('userId');
 
+    //api for get shopping cart item
     useEffect(() => {
         const fetchCartItems = async () => {
             let response = await axios.get(BASE_URL + "api/shoppingCart/" + localStorage.getItem('userId'));
@@ -29,12 +34,44 @@ export default function Cart() {
         }
         fetchCartItems();
 
-    }, []);
+    }, [removeCartItem]);
+
+    //api for update shopping cart item
+
+
+    //api for remove shopping cart item
+
+
 
     useEffect(() => {
-        console.log(cartItems.length);
-        setTestItem(cartItems);
-    }, [cartItems]);
+        console.log(removeCartItem);
+    }, [removeCartItem]);
+
+    const onUpdateFormField = (e) => setItemQuantity({
+        ...qty,
+        [e.target.name]: e.target.value
+    })
+
+    const decreaseQty = () =>{
+
+    }
+
+    const increaseQty = () => {
+
+    }
+
+    const removeItemFromCart = async (removeItem) => {
+        setRemoveItem()
+        console.log("Remove item")
+        console.log(removeItem);
+        const requestBodyData = {
+            "user_id": removeItem.user_id,
+            "product_id": removeItem.product_id,
+            "cart_quantity": removeItem.quantity
+        }
+        let response = await axios.post(BASE_URL + "api/shoppingCart/remove/item", requestBodyData, { headers });
+        setRemoveItem(response.data);
+    }
 
     return (
         <React.Fragment>
@@ -52,13 +89,31 @@ export default function Cart() {
                                 <Typography gutterBottom variant="h5" component="div">
                                     {e.product.product_name}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary" component="div">
-                                    {e.description}
+                                <Box sx={{ display: 'inline-flex' }}>
+                                    <Button sx={{ mr: 2 }}
+                                        variant="contained"
+                                        size="small"
+                                        onClick={decreaseQty}>-</Button>
+                                    <TextField id="outlined-basic"
+                                        label="Outlined"
+                                        variant="outlined"
+                                        size="small"
+                                        name="quantity"
+                                        value={e.quantity}
+                                        onChange={onUpdateFormField}
+                                    />
+                                    <Button sx={{ ml: 2 }}
+                                        variant="contained"
+                                        size="small"
+                                        onClick={increaseQty}>+</Button>
+                                </Box>
+
+                                <Typography sx={{ m: 2 }} variant="body2" color="text.secondary" component="div">
+                                    {e.product.description}
                                 </Typography>
                             </CardContent>
-                            <CardActions key={e.price}>
-                                <Button size="small">Update quantity</Button>
-                                <Button size="small">Remove item</Button>
+                            <CardActions sx={{ mt: 5 }} key={e.price}>
+                                <Button variant="contained" size="small" value={e} onClick={() => {removeItemFromCart(e)}}>Remove item</Button>
                             </CardActions>
                         </Card>
                     </Grid>

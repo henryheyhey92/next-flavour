@@ -25,6 +25,9 @@ export default function Users(props) {
         [e.target.name]: e.target.value
     })
 
+    useEffect(() => {
+        console.log(userInfo);
+    }, [userInfo]);
     
 
     const login = async () => {

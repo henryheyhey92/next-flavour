@@ -34,12 +34,10 @@ export default function Products() {
     })
 
     const addToCart = async (e) => {
-        console.log(e.target.value);
-        let productId = e.target.value;
         //Check if access token is expired or not
         // true => your token is expired
         // false => your token is not expired  
-        console.log("Hello from addcart")
+        
         let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
         if (!accessTokenNotExpired) {
             //call the profile api or cart 
@@ -64,9 +62,6 @@ export default function Products() {
            }
 
         }
-        // console.log(response);
-        // let response = await context.addToCart(e.target, value);
-        // console.log(response)
     }
 
     return (

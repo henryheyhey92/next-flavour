@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
 import UsersContext from '../../contexts/UsersContext';
 import API_URL from '../../constant/Constants';
 import axios from 'axios';
@@ -13,12 +13,16 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { headers } from '../../constant/Constants';
+
+
 const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 
 export default function Cart() {
+    let context = useContext(UsersContext);
 
     const [cartItems, setCartItems] = useState([]);
+    const [addItem, setAddItem] = useState();
     const [removeCartItem, setRemoveItem] = useState();
     const [qty, setItemQuantity] = useState({
         quantity: ""
@@ -34,7 +38,7 @@ export default function Cart() {
         }
         fetchCartItems();
 
-    }, [removeCartItem]);
+    }, [removeCartItem, addItem]);
 
     //api for update shopping cart item
 
@@ -56,14 +60,31 @@ export default function Cart() {
 
     }
 
-    const increaseQty = () => {
+    const increaseQty = async (product_id) => {
+         setAddItem();
+        let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
+        if (!accessTokenNotExpired) {
+            //call the profile api or cart 
+            const requestBodyData = {
+                "user_id": localStorage.getItem('userId'),
+                'product_id': product_id
+            }
+            let response = await axios.post(BASE_URL + "api/shoppingCart/additem", requestBodyData, { headers });
+            setAddItem(response.data);
+        } else {
+            //need to prom for get new access token or ask user to sign in
+            console.log("get new access token")
+           let result = await context.getRefreshToken();
+           if(result){
+               console.log("call add to cart")
+               increaseQty(product_id);
+           }
 
+        }
     }
 
     const removeItemFromCart = async (removeItem) => {
         setRemoveItem()
-        console.log("Remove item")
-        console.log(removeItem);
         const requestBodyData = {
             "user_id": removeItem.user_id,
             "product_id": removeItem.product_id,
@@ -108,7 +129,7 @@ export default function Cart() {
                                     <Button sx={{ ml: 1 }}
                                         variant="contained"
                                         size="small"
-                                        onClick={increaseQty}>+</Button>
+                                        onClick={() => {increaseQty(e.product_id)}}>+</Button>
                                 </Box>
                                 <Typography sx={{ m: 2 }} variant="body2" color="text.secondary" component="div">
                                     {e.product.description}

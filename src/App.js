@@ -22,30 +22,13 @@ function App() {
       {/* <NavbarBootStrap /> */}
       <Router>
       <NavbarBootStrap />
-      {/* <Navbar /> */}
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Landing</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-            <li>
-              <Link to="/products">Products</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-
-          </ul>
-        </nav> */}
 
         <Routes>
           {/* Landing route */}
-          <Route path="/" element={<Landing />} />
+          {/* <Route path="/" element={<Landing />} /> */}
           {/* Users route */}
-          <Route path="/users" element={<Users />} />
+          {/* <Route path="/users" element={<Users />} /> */}
+          <Route path="/" element={<Users />} />
           {/* Cart route */}
           <Route path="/cart" element={<Cart />} />
           {/* Contact Us route */}

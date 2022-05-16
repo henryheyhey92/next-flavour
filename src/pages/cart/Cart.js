@@ -23,6 +23,7 @@ export default function Cart() {
 
     const [cartItems, setCartItems] = useState([]);
     const [addItem, setAddItem] = useState();
+    const [substractItem, setSubtractItem] = useState();
     const [removeCartItem, setRemoveItem] = useState();
     const [qty, setItemQuantity] = useState({
         quantity: ""
@@ -38,7 +39,7 @@ export default function Cart() {
         }
         fetchCartItems();
 
-    }, [removeCartItem, addItem]);
+    }, [removeCartItem, addItem, substractItem]);
 
     //api for update shopping cart item
 
@@ -56,13 +57,37 @@ export default function Cart() {
         [e.target.name]: e.target.value
     })
 
-    const decreaseQty = () =>{
+    // decrease cart quantity api
+    const decreaseQty = async (product_id) =>{
+        setSubtractItem();
+        let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
+        console.log("is access token");
+        console.log(accessTokenNotExpired);
+        if (!accessTokenNotExpired) {
+            //call the profile api or cart 
+            const requestBodyData = {
+                "user_id": localStorage.getItem('userId'),
+                'product_id': product_id
+            }
+            let response = await axios.post(BASE_URL + "api/shoppingCart/substract", requestBodyData, { headers });
+            setSubtractItem(response.data);
+        } else {
+            //need to prom for get new access token or ask user to sign in
+            console.log("get new access token")
+           let result = await context.getRefreshToken();
+           if(result){
+               console.log("call add to cart")
+               decreaseQty(product_id);
+           }
 
+        }
     }
-
+    //increase cart quantity api
     const increaseQty = async (product_id) => {
          setAddItem();
         let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
+        console.log("is access token");
+        console.log(accessTokenNotExpired);
         if (!accessTokenNotExpired) {
             //call the profile api or cart 
             const requestBodyData = {
@@ -117,7 +142,7 @@ export default function Cart() {
                                     <Button sx={{ mr: 1 }}
                                         variant="contained"
                                         size="small"
-                                        onClick={decreaseQty}>-</Button>
+                                        onClick={() => {decreaseQty(e.product_id)}}>-</Button>
                                     <TextField id="outlined-basic"
                                         label="Outlined"
                                         variant="outlined"

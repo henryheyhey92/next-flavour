@@ -57,6 +57,7 @@ export default function UsersProvider(props) {
             }
             console.log(data);
             if (data) {
+                console.log("post request to logout")
                 let response = await axios.post(BASE_URL + "api/users/logout", data)
                 if (response.data) {
                     setLogIn(false);
@@ -107,6 +108,9 @@ export default function UsersProvider(props) {
                 // true => your token is expired
                 // false => your token is not expired
                 const isMyTokenExpired = isExpired(accessToken);
+                console.log("token is it valid");
+                console.log(isMyTokenExpired);
+                console.log(accessToken);
                 return isMyTokenExpired;
             }catch(err){
                 console.log(err)

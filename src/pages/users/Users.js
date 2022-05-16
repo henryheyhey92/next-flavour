@@ -35,14 +35,15 @@ export default function Users(props) {
         console.log(result);
         setLogin(true);
         if(result){
-            navigate('/Profile')
+            // navigate('/Profile')
         }
     }
         
 
 
     const logout = async () => {
-        let result = await context.logout()
+        console.log("Enter logout process");
+        let result = await context.logout();
         console.log(result);
         setLogin(false);
     }

@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react';
-import { Row, Col, Card, Button } from 'react-bootstrap';
-import UsersContext from '../../contexts/UsersContext';
+import { Row, Card, Button } from 'react-bootstrap';
+// import UsersContext from '../../contexts/UsersContext';
 import axios from 'axios';
 import {BASE_URL} from '../../constant/Constants';
 
@@ -13,7 +13,7 @@ export default function ProductDetails() {
     const params = useParams();
     const productId = params.productId
     const [productDetails, setProductDetails] = useState({});
-    const context = useContext(UsersContext);
+    // const context = useContext(UsersContext);
 
     useEffect(() => {
         const fetchProductDetails = async () => {

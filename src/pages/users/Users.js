@@ -2,15 +2,15 @@ import React, { useEffect, useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import UsersContext from '../../contexts/UsersContext';
-import { BASE_URL } from '../../constant/Constants';
+// import { BASE_URL } from '../../constant/Constants';
 
 
 // const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function Users(props) {
-    const navigate = new useNavigate();
+    // const navigate = new useNavigate();
     let context = useContext(UsersContext);
 
     const [userInfo, setUser] = useState({
@@ -28,7 +28,9 @@ export default function Users(props) {
 
     useEffect(() => {
         console.log(userInfo);
-    }, [userInfo]);
+        console.log(logIn);
+
+    }, [userInfo, logIn]);
     
 
     const login = async () => {

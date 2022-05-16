@@ -1,11 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Cart from './pages/cart/Cart';
 import Landing from './pages/landing/Landing';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
 import Profile from './pages/users/Profile';
 import ProductDetails from './pages/products/ProductDetails';
-import Navbar from './Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import UsersProvider from "./contexts/UsersProvider";
 import React from "react";

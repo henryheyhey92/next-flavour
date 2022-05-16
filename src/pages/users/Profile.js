@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import UsersContext from '../../contexts/UsersContext';
 
 export default function Profile() {
-    let context = useContext(UsersContext);
     const [userProfile, setUserProfile] = useState({});
     const accessToken = localStorage.getItem('accessToken');
+    let context = useContext(UsersContext);
 
     useEffect(()=> {
         const fetchProfile = async () => {
@@ -15,7 +15,8 @@ export default function Profile() {
             console.log(response);
         }
         fetchProfile();
-    }, [accessToken])
+
+    }, [accessToken, context])
 
     return (
         <React.Fragment>

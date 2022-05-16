@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import UsersContext from '../../contexts/UsersContext';
-import API_URL from '../../constant/Constants';
 import axios from 'axios';
 // import { Card, Button } from 'react-bootstrap';
 import Grid from '@mui/material/Grid';
@@ -35,7 +34,7 @@ export default function Cart() {
     //     'sessionId': "", // 4. Get the ID of the session
     //     'publishableKey': ""
     // })
-    const userId = localStorage.getItem('userId');
+    // const userId = localStorage.getItem('userId');
 
     //api for get shopping cart item
     useEffect(() => {

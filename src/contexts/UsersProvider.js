@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import UsersContext from './UsersContext'
 import axios from 'axios';
-import { isExpired, decodeToken } from "react-jwt";
+import { isExpired } from "react-jwt";
 import {BASE_URL} from '../constant/Constants';
 
 // const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function UsersProvider(props) {
    
-    const [userProfile, setUserProfile] = useState({});
-    const [logIn, setLogIn] = useState(false);
-    const [product, setProduct] = useState([]);
-    const [addItem, setItem] = useState([]);  //for add to cart
+    // const [userProfile, setUserProfile] = useState({});
+    // const [logIn, setLogIn] = useState(false);
+    // const [product, setProduct] = useState([]);
+    // const [addItem, setItem] = useState([]);  //for add to cart
     const [stripeKey, setStripeKey] = useState({});
 
     const context = {
@@ -25,12 +25,12 @@ export default function UsersProvider(props) {
                 localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
                 localStorage.setItem('userId', response.data.userId)
-                setLogIn(true);
+                // setLogIn(true);
                 console.log("response data")
                 console.log(response.data)
                 return true;
             } else {
-                setLogIn(false);
+                // setLogIn(false);
                 return false;
             }
 
@@ -44,10 +44,10 @@ export default function UsersProvider(props) {
                 }
             })
             if (response.data) {
-                setUserProfile(response.data);
+                // setUserProfile(response.data);
                 return response.data;
             } else {
-                setUserProfile({})
+                // setUserProfile({})
                 return false;
             }
 
@@ -62,8 +62,8 @@ export default function UsersProvider(props) {
                 console.log("post request to logout")
                 let response = await axios.post(BASE_URL + "api/users/logout", data)
                 if (response.data) {
-                    setLogIn(false);
-                    setUserProfile({});
+                    // setLogIn(false);
+                    // setUserProfile({});
                     localStorage.clear()
                     return true; //logout success
                 }
@@ -74,7 +74,7 @@ export default function UsersProvider(props) {
         },
         product: async () => {
             let response = await axios.get(BASE_URL + 'api/products');
-            setProduct(response.data);
+            // setProduct(response.data);
             if(response.data){
                 return response.data
             }
@@ -90,7 +90,7 @@ export default function UsersProvider(props) {
             }
             let response = await axios.post(BASE_URL + "api/shoppingCart/additem", requestBodyData, { headers });
 
-            setItem(response.data);
+            // setItem(response.data);
             if(response.data){
                 return response.data
             }else{

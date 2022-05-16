@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 // import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 // import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+// import CardActions from '@mui/material/CardActions';
+// import CardContent from '@mui/material/CardContent';
+// import CardMedia from '@mui/material/CardMedia';
+// import Grid from '@mui/material/Grid';
+// import Typography from '@mui/material/Typography';
 import axios from 'axios'
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
@@ -38,12 +38,12 @@ export default function Products() {
         //Check if access token is expired or not
         // true => your token is expired
         // false => your token is not expired  
-        
+        let accessToken = localStorage.getItem("accessToken");
         let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
         if (!accessTokenNotExpired) {
             //call the profile api or cart 
             const headers = {
-                'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
+                'Authorization': "Bearer" + " " + accessToken
             }
             const requestBodyData = {
                 "user_id": localStorage.getItem('userId'),

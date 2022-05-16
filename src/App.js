@@ -5,13 +5,13 @@ import Products from './pages/products/Products';
 import Users from './pages/users/Users';
 import Profile from './pages/users/Profile';
 import ProductDetails from './pages/products/ProductDetails';
-import 'bootstrap/dist/css/bootstrap.min.css'
 import UsersProvider from "./contexts/UsersProvider";
 import React from "react";
 import NavbarBootStrap from "./NavbarBootStrap";
 import Checkout from "./pages/checkout/Checkout";
 import StripePaymentSuccess from "./pages/paymentStatus/success/StripePaymentSuccess";
 import StripePaymentFailure from "./pages/paymentStatus/failure/StripePaymentFailure";
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 

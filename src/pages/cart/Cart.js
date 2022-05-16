@@ -38,6 +38,8 @@ export default function Cart() {
 
     //api for get shopping cart item
     useEffect(() => {
+        console.log("userId");
+        console.log(localStorage.getItem('userId'))
         const fetchCartItems = async () => {
             let response = await axios.get(BASE_URL + "api/shoppingCart/" + localStorage.getItem('userId'));
             console.log(response.data);
@@ -123,7 +125,7 @@ export default function Cart() {
             "user_id": localStorage.getItem('userId')
         }
         const headers = {
-            'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
+            'Authorization': "Bearer "+ localStorage.getItem("accessToken")
         }
         console.log("Enter check out front function");
         console.log("user_id");

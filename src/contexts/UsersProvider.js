@@ -22,6 +22,8 @@ export default function UsersProvider(props) {
                 "password": password
             })
             if (response.data) {
+                console.log("response data");
+                console.log(response.data);
                 localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
                 localStorage.setItem('userId', response.data.userId)
@@ -38,9 +40,10 @@ export default function UsersProvider(props) {
         },
 
         profile: async () => {
+            const token = localStorage.getItem("accessToken")
             let response = await axios.get(BASE_URL + "api/users/profile", {
                 headers: {
-                    'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
+                    'Authorization': 'Bearer ' +token
                 }
             })
             if (response.data) {
@@ -82,7 +85,7 @@ export default function UsersProvider(props) {
         //addItem to cart
         addToCart: async (itemId) => {
             const headers = {
-                'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
+                'Authorization': "Bearer " + localStorage.getItem("accessToken")
             }
             const requestBodyData = {
                 "user_id": localStorage.getItem('userId'),

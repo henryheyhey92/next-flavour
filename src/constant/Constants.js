@@ -3,7 +3,7 @@ export const API_URL = {
 }
 
 export const headers = {
-  'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
+  'Authorization': "Bearer "+ localStorage.getItem("accessToken")
 }
 
 export const BASE_URL = "https://hl-espresso-db.herokuapp.com/";

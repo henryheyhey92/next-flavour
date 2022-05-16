@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import UsersContext from './UsersContext'
 import axios from 'axios';
 import { isExpired, decodeToken } from "react-jwt";
+import {BASE_URL} from '../constant/Constants';
 
-const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
+// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function UsersProvider(props) {
    
@@ -11,6 +12,7 @@ export default function UsersProvider(props) {
     const [logIn, setLogIn] = useState(false);
     const [product, setProduct] = useState([]);
     const [addItem, setItem] = useState([]);  //for add to cart
+    const [stripeKey, setStripeKey] = useState({});
 
     const context = {
         login: async (email, password) => {
@@ -145,6 +147,12 @@ export default function UsersProvider(props) {
                 return false
             }
             
+        },
+        setStripeKey: (keys) => {
+            setStripeKey(keys);
+        },
+        getStripKey: () => {
+            return stripeKey;
         }
 
     }

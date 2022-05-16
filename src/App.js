@@ -10,6 +10,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import UsersProvider from "./contexts/UsersProvider";
 import React from "react";
 import NavbarBootStrap from "./NavbarBootStrap";
+import Checkout from "./pages/checkout/Checkout";
+import StripePaymentSuccess from "./pages/paymentStatus/success/StripePaymentSuccess";
+import StripePaymentFailure from "./pages/paymentStatus/failure/StripePaymentFailure";
 
 
 
@@ -50,6 +53,10 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/:productId" element={<ProductDetails />} />
           <Route path="/Profile" element={<Profile />} />
+          {/* route to checkout */}
+          <Route path="/checkout" element={<Checkout/>} />
+          <Route path="/paymentStatus/success" element={<StripePaymentSuccess />} />
+          <Route path="/paymentStatus/failure" element={<StripePaymentFailure />} />
         </Routes>
 
       </Router>

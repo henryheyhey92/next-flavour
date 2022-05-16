@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import UsersContext from '../../contexts/UsersContext';
 import API_URL from '../../constant/Constants';
 import axios from 'axios';
@@ -13,13 +13,16 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { headers } from '../../constant/Constants';
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../constant/Constants';
 
 
-const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
+// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 
 export default function Cart() {
     let context = useContext(UsersContext);
+    let navigate = new useNavigate();
 
     const [cartItems, setCartItems] = useState([]);
     const [addItem, setAddItem] = useState();
@@ -28,6 +31,10 @@ export default function Cart() {
     const [qty, setItemQuantity] = useState({
         quantity: ""
     });
+    // const [stripKeys, setStripeKey] = useSate({
+    //     'sessionId': "", // 4. Get the ID of the session
+    //     'publishableKey': ""
+    // })
     const userId = localStorage.getItem('userId');
 
     //api for get shopping cart item
@@ -41,13 +48,6 @@ export default function Cart() {
 
     }, [removeCartItem, addItem, substractItem]);
 
-    //api for update shopping cart item
-
-
-    //api for remove shopping cart item
-
-
-
     useEffect(() => {
         console.log(removeCartItem);
     }, [removeCartItem]);
@@ -58,7 +58,7 @@ export default function Cart() {
     })
 
     // decrease cart quantity api
-    const decreaseQty = async (product_id) =>{
+    const decreaseQty = async (product_id) => {
         setSubtractItem();
         let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
         console.log("is access token");
@@ -74,17 +74,17 @@ export default function Cart() {
         } else {
             //need to prom for get new access token or ask user to sign in
             console.log("get new access token")
-           let result = await context.getRefreshToken();
-           if(result){
-               console.log("call add to cart")
-               decreaseQty(product_id);
-           }
+            let result = await context.getRefreshToken();
+            if (result) {
+                console.log("call add to cart")
+                decreaseQty(product_id);
+            }
 
         }
     }
     //increase cart quantity api
     const increaseQty = async (product_id) => {
-         setAddItem();
+        setAddItem();
         let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
         console.log("is access token");
         console.log(accessTokenNotExpired);
@@ -99,11 +99,11 @@ export default function Cart() {
         } else {
             //need to prom for get new access token or ask user to sign in
             console.log("get new access token")
-           let result = await context.getRefreshToken();
-           if(result){
-               console.log("call add to cart")
-               increaseQty(product_id);
-           }
+            let result = await context.getRefreshToken();
+            if (result) {
+                console.log("call add to cart")
+                increaseQty(product_id);
+            }
 
         }
     }
@@ -119,8 +119,28 @@ export default function Cart() {
         setRemoveItem(response.data);
     }
 
+    const checkoutFromCart = async () => {
+        const requestBodyData = {
+            "user_id": localStorage.getItem('userId')
+        }
+        const headers = {
+            'Authorization': "Bearer" + " " + localStorage.getItem("accessToken")
+        }
+        console.log("Enter check out front function");
+        console.log("user_id");
+        console.log(requestBodyData);
+        let response = await axios.get(BASE_URL + "api/checkout/"+ localStorage.getItem('userId') , { headers });
+        context.setStripeKey(response.data);
+        if(response.data){
+            navigate('/Checkout');
+        }
+    }
+
     return (
         <React.Fragment>
+            <Button sx={{ width: '100%', mt: 2, mb: 2 }}
+                variant="contained"
+                onClick={() => { checkoutFromCart() }}>check out</Button>
             {(cartItems.length !== 0) ? cartItems.map(e => {
                 return (
                     <Grid item xs={12} sm={6} md={4} key={e.id}>
@@ -138,11 +158,11 @@ export default function Cart() {
                                 <Typography gutterBottom variant="h5" component="div">
                                     inventory stock: {e.product.qty}
                                 </Typography>
-                                <Box sx={{ display: 'inline-flex' , m: 3}}>
+                                <Box sx={{ display: 'inline-flex', m: 3 }}>
                                     <Button sx={{ mr: 1 }}
                                         variant="contained"
                                         size="small"
-                                        onClick={() => {decreaseQty(e.product_id)}}>-</Button>
+                                        onClick={() => { decreaseQty(e.product_id) }}>-</Button>
                                     <TextField id="outlined-basic"
                                         label="Outlined"
                                         variant="outlined"
@@ -154,14 +174,14 @@ export default function Cart() {
                                     <Button sx={{ ml: 1 }}
                                         variant="contained"
                                         size="small"
-                                        onClick={() => {increaseQty(e.product_id)}}>+</Button>
+                                        onClick={() => { increaseQty(e.product_id) }}>+</Button>
                                 </Box>
                                 <Typography sx={{ m: 2 }} variant="body2" color="text.secondary" component="div">
                                     {e.product.description}
                                 </Typography>
                             </CardContent>
                             <CardActions sx={{ mt: 2 }} key={e.price}>
-                                <Button variant="contained" size="small" value={e} onClick={() => {removeItemFromCart(e)}}>Remove item</Button>
+                                <Button variant="contained" size="small" value={e} onClick={() => { removeItemFromCart(e) }}>Remove item</Button>
                             </CardActions>
                         </Card>
                     </Grid>

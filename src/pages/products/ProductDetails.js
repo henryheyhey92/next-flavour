@@ -4,8 +4,9 @@ import { useEffect } from 'react';
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import UsersContext from '../../contexts/UsersContext';
 import axios from 'axios';
+import {BASE_URL} from '../../constant/Constants';
 
-const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
+// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 
 export default function ProductDetails() {

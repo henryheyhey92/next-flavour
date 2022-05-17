@@ -156,6 +156,11 @@ export default function UsersProvider(props) {
         },
         getStripKey: () => {
             return stripeKey;
+        },
+        //search by text
+        searchByText: async (reqboyObj) => {
+            let response = await axios.get(BASE_URL + 'api/products/search/text', reqboyObj);
+            return response
         }
 
     }

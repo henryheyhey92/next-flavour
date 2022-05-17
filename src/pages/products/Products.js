@@ -8,14 +8,17 @@ import axios from 'axios'
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import UsersContext from '../../contexts/UsersContext';
-import { BASE_URL } from '../../constant/Constants';
+// import { BASE_URL } from '../../constant/Constants';
 
-// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
+const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function Products() {
 
     //state
     const [product, setProduct] = useState([]);
+    const [textSearch, setTextSearch] = useState({
+        productKeyword: ""
+    });
     let context = useContext(UsersContext);
     //componment didmout
     useEffect(() => {
@@ -23,12 +26,14 @@ export default function Products() {
             let response = await axios.get(BASE_URL + 'api/products');
             setProduct(response.data);
             console.log(response.data);
+            console.log(typeof(response.data));
         }
         fetchProduct()
     }, [])
 
-    useEffect(() => {
-
+    const onUpdateFormField = (e) => setTextSearch({
+        ...textSearch,
+        [e.target.name]: e.target.value
     })
 
     const addToCart = async (e) => {
@@ -62,27 +67,41 @@ export default function Products() {
         }
     }
 
+
+    const searchBytext = async () => {
+        const reqbody = {
+            'keyword': textSearch.productKeyword
+        }
+
+        let response = await axios.post(BASE_URL + 'api/products/search/text', reqbody);
+        setProduct(response.data);
+    }
+
     return (
         <React.Fragment>
-            <Typography className="lead fs-2" sx={{ml: 2}}>Coffee Bean Products</Typography>
-            <Paper
-                component="form"
-                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 'auto', m:2 }}
-            >
+            <Typography className="lead fs-2" sx={{ ml: 2 }}>Coffee Bean Products</Typography>
+            <Paper sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 'auto', m:2 }}>
                 <InputBase
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search"
                     inputProps={{ 'aria-label': 'search google maps' }}
+                    name="productKeyword" 
+                    value={textSearch.productKeyword}
+                    onChange={onUpdateFormField}
                 />
-                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                <IconButton type="submit" sx={{ p: '10px' }} 
+                            aria-label="search"  
+                            onClick={searchBytext}>
                     <SearchIcon />
                 </IconButton>
             </Paper>
+            {/* add in accordino */}
+
             <Row xs={1} md={3} className="g-3">
-                {product.map((p, idx) => (
+                {product ? product.map((p) => (
                     <Col>
                         <Card className="rounded-0" key={p.id}>
-                            <Link to={"/" + p.id} className="text-decoration-none text-reset">
+                            <Link to={"/details/" + p.id} className="text-decoration-none text-reset">
                                 <Card.Img className="rounded-0" variant="top" src={p.image_url} key={p.image_url} />
                                 <Card.Body key={p.product_name}>
                                     <Card.Text className="lead fs-5" >
@@ -97,7 +116,7 @@ export default function Products() {
                             >Add to Cart</Button>
                         </Card>
                     </Col>
-                ))}
+                )): <h1>Loading</h1>}
             </Row>
 
         </React.Fragment>

@@ -34,11 +34,12 @@ export default function Products() {
         product_text: "",
         min_price: "",
         max_price: "",
-        roast_type: ""
+        roast_type: "",
+        cert: []
     })
 
     const [roastType, setRoastType] = useState([]);
-    const [certType, setCertType] = useState();
+    const [certType, setCertType] = useState([]);
     const [originType, setOriginType] = useState();
 
     let context = useContext(UsersContext);
@@ -53,6 +54,7 @@ export default function Products() {
 
             setRoastType(roastRes.data);
             setCertType(certRes.data);
+            console.log(certRes.data);
             setOriginType(originRes.data);
             setProduct(response.data);
             console.log(response.data);
@@ -73,6 +75,33 @@ export default function Products() {
         ...formSearch,
         [e.target.name]: e.target.value
     })
+
+
+    const updateCheckboxes = (e) => {
+
+        if (formSearch[e.target.name].includes(e.target.value)) {
+            // case 1: the evt.target.value is already in the array
+            let indexToRemove = formSearch[e.target.name].findIndex(v => {
+                return v === e.target.value
+            })
+            let cloned = formSearch[e.target.name].slice();
+            cloned.splice(indexToRemove, 1);
+            setForm({
+                ...formSearch,
+                [e.target.name]: cloned
+            })
+        } else {
+            // case 2: the evt.target.value is not in the array
+            // it means: add evt.target.value to array
+
+            let clone = formSearch[e.target.name].slice();
+            clone.push(e.target.value);
+            setForm({
+                ...formSearch,
+                [e.target.name]: clone
+            })
+        }
+    }
 
     const addToCart = async (e) => {
         //Check if access token is expired or not
@@ -114,51 +143,35 @@ export default function Products() {
 
         //to get the roast type index to query the coffee bean roast type id
         let roastTypeIdentifier = null;
-        for(let e of roastType){
-            if(e[1] === formSearch.roast_type){
+        for (let e of roastType) {
+            if (e[1] === formSearch.roast_type) {
                 roastTypeIdentifier = e[0]
             }
         }
         ////
 
+        //to get the roast type index to query the coffee bean roast type id
+        // let certTypeIdentifier = [];
+        // for (let e of certType) {
+        //     if (e.name.includes(formSearch.certType)) {
+        //         certTypeIdentifier = e.name
+        //     }
+        // }
+        console.log("checkbox");
+        console.log(formSearch.cert);
+        ////
+
         const reqbody = {
             'min_price': formSearch.min_price,
             'max_price': formSearch.max_price,
-            'roast_type': roastTypeIdentifier
+            'roast_type': roastTypeIdentifier,
+            'certificates': formSearch.cert
         }
         let response = await axios.post(BASE_URL + 'api/products/filter/by', reqbody);
         console.log(response.data);
         setProduct(response.data)
     }
 
-    // const renderRadioOption = () => {
-    //     let options = [];
-    //     let temp = [];
-    //     //get the data 
-    //     if (roastType) {
-    //         temp = roastType
-    //         console.log("Print temp");
-    //         console.log(temp);
-    //     }
-    //     if (temp) {
-    //         for (let o of temp) {
-    //             options.push(
-    //                 <FormControlLabel
-    //                     key={o.id}  
-    //                     // value={o.value}
-    //                     control={<Radio />}
-    //                     label={o.name}
-    //                     name='roastType'
-    //                     // onChange={this.updateFormField}
-    //                     // checked={this.state.category.includes(o.value)}
-    //                     style={{ minWidth: 125 }} />
-    //             )
-    //             console.log(o)
-    //         }
-    //     }
-
-    //     return options;
-    // }
 
     // renderCheckboxOption() {
     //     let temp = [];
@@ -238,18 +251,35 @@ export default function Products() {
                     />
                 </div>
                 <div>
-                    <label>Example select</label>
+                    <label>Select Roast Type</label>
                     <select name="roast_type"
-                            onChange={onUpdateSearchFormField}
-                            value={formSearch.roast_type}>
+                        onChange={onUpdateSearchFormField}
+                        value={formSearch.roast_type}>
                         <option>---------</option>
                         {roastType ? roastType.map((element, i) => {
                             return <option key={element[1]}
-                                    value={element[1]}>{element[1]}</option>
-                        }):  <option>---------</option>}
-                        
+                                value={element[1]}>{element[1]}</option>
+                        }) : <option>---------</option>}
+
                     </select>
                 </div>
+                <div>
+                    <label>Select your appetisers:</label>
+                    {
+                        certType.map(a => {
+                            return <React.Fragment key={a.id}>
+                                <input type="checkbox"
+                                    name="cert"
+                                    value={a.id}
+                                    // onChange={console.log(1)}
+                                    onClick={updateCheckboxes}
+                                />
+                                <label>{a.name}</label>
+                            </React.Fragment>
+                        })
+                    }
+                </div>
+
                 <div>
                     <label>Min price</label>
                     <input type="text"
@@ -295,10 +325,15 @@ export default function Products() {
                                     <Card.Text className="lead fs-5" >
                                         {p.product_name} ({p.description})
                                         <Card.Text sx={{ m: 1 }}>
-                                            ({p.price}) 
+                                            ({p.price})
                                         </Card.Text>
                                         <Card.Text sx={{ m: 1 }}>
-                                            ({p.roastType.name}) 
+                                            ({p.roastType.name})
+                                        </Card.Text>
+                                        <Card.Text sx={{ m: 1 }}>
+                                            {p.certificates.map(cert => {
+                                                return <label>{cert.name}</label>
+                                            })}
                                         </Card.Text>
                                     </Card.Text>
                                 </Card.Body>

@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.title-name{
+  color: #FFFFFF;
+  text-shadow: 2px 1px black;
+  font-family: 'Smooch', cursive;
+  font-size: 1.7rem;
+}

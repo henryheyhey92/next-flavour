@@ -1,0 +1,21 @@
+.user-login{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+  }
+
+
+  .login-image{
+    width: 100%;
+    position: relative;
+    height: 100vh;
+    background-image: url(../../image/login-coffee.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* object-fit: contain; */
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

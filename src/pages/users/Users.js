@@ -4,7 +4,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import UsersContext from '../../contexts/UsersContext';
-// import { BASE_URL } from '../../constant/Constants';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import "./style.css";
+
+
 
 
 // const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
@@ -19,7 +23,7 @@ export default function Users(props) {
     })
 
     const [logIn, setLogin] = useState(false);
-    
+
 
     const onUpdateFormField = (e) => setUser({
         ...userInfo,
@@ -31,17 +35,17 @@ export default function Users(props) {
         console.log(logIn);
 
     }, [userInfo, logIn]);
-    
+
 
     const login = async () => {
         let result = await context.login(userInfo.email, userInfo.password);
         console.log(result);
         setLogin(true);
-        if(result){
+        if (result) {
             navigate('/Profile')
         }
     }
-        
+
 
 
     const logout = async () => {
@@ -54,39 +58,44 @@ export default function Users(props) {
 
     return (
         <React.Fragment>
-            <h1>Users Login page</h1>
-            <Box
-                sx={{
-                    m: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    minWdith: "sx"
-                }}
-            >
-                <TextField id="url-name"
-                    label="Email"
-                    variant="outlined"
-                    name='email'
-                    value={userInfo.email}
-                    onChange={onUpdateFormField}
-                    className="textfield-image-url"
-                    helperText
-                />
+            <div className='login-image'>
+                <h1 className='user-login'>Users Login page</h1>
+                <Box>
+                    <Paper elevation={3} sx={{ m: 2 }}>
+                        <Grid container spacing={2} sx={{ width: '100%' }}>
 
-                <TextField id="Artwork-name"
-                    label="Password"
-                    variant="outlined"
-                    name='password'
-                    value={userInfo.password}
-                    onChange={onUpdateFormField}
-                    className="textfield-style"
-                    type="text"
-                    helperText
-                />
-            </Box>
-            <Button onClick={login}>login</Button>
-            <Button onClick={logout}>logout</Button>
+                            <Grid item xs={12} sm={6}>
+                                <TextField id="url-name"
+                                    label="Email"
+                                    variant="outlined"
+                                    name='email'
+                                    value={userInfo.email}
+                                    onChange={onUpdateFormField}
+                                    className="textfield-image-url"
+                                    helperText
+                                    sx={{ width: '100%', m: 1 }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField id="Artwork-name"
+                                    label="Password"
+                                    variant="outlined"
+                                    name='password'
+                                    value={userInfo.password}
+                                    onChange={onUpdateFormField}
+                                    className="textfield-style"
+                                    type="text"
+                                    helperText
+                                    sx={{ width: '100%', m: 1 }}
+                                />
+                            </Grid>
+                        </Grid>
+                        {/* </Box> */}
+                        <Button sx={{ m: 2 }} variant="contained" onClick={login}>login</Button>
+                        {/* <Button variant="contained" onClick={logout}>logout</Button> */}
+                    </Paper>
+                </Box>
+            </div>
         </React.Fragment>
 
     )

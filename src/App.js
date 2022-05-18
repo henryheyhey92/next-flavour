@@ -11,6 +11,7 @@ import NavbarBootStrap from "./NavbarBootStrap";
 import Checkout from "./pages/checkout/Checkout";
 import StripePaymentSuccess from "./pages/paymentStatus/success/StripePaymentSuccess";
 import StripePaymentFailure from "./pages/paymentStatus/failure/StripePaymentFailure";
+import FooterBar from "./FooterBar";
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -40,7 +41,7 @@ function App() {
           <Route path="/paymentStatus/success" element={<StripePaymentSuccess />} />
           <Route path="/paymentStatus/failure" element={<StripePaymentFailure />} />
         </Routes>
-
+      <FooterBar/>
       </Router>
     </UsersProvider>
   );

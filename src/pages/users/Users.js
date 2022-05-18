@@ -7,7 +7,12 @@ import UsersContext from '../../contexts/UsersContext';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import "./style.css";
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 
 
@@ -42,26 +47,19 @@ export default function Users(props) {
         console.log(result);
         setLogin(true);
         if (result) {
-            navigate('/Profile')
+            navigate('/')
         }
-    }
-
-
-
-    const logout = async () => {
-        console.log("Enter logout process");
-        let result = await context.logout();
-        console.log(result);
-        setLogin(false);
     }
 
 
     return (
         <React.Fragment>
             <div className='login-image'>
-                <h1 className='user-login'>Users Login page</h1>
+                {/* <h1 className='user-login-none'>Users Login page</h1> */}
                 <Box>
+
                     <Paper elevation={3} sx={{ m: 2 }}>
+                        <h1 className='user-login'>Users Login</h1>
                         <Grid container spacing={2} sx={{ width: '100%' }}>
 
                             <Grid item xs={12} sm={6}>
@@ -91,8 +89,14 @@ export default function Users(props) {
                             </Grid>
                         </Grid>
                         {/* </Box> */}
-                        <Button sx={{ m: 2 }} variant="contained" onClick={login}>login</Button>
-                        {/* <Button variant="contained" onClick={logout}>logout</Button> */}
+                        <Box sx={{display: 'flex', flexDirection: 'column', alignContent: 'center'}}>
+                            <Button sx={{ m: 2 }} variant="contained" onClick={login}>login</Button>
+                            {/* <Button variant="contained" onClick={logout}>logout</Button> */}
+                            <Box sx={{textAlign: 'center'}}><Link to={"/signup"} >No account? Click here to sign up</Link></Box>
+                           
+                        </Box>
+
+
                     </Paper>
                 </Box>
             </div>

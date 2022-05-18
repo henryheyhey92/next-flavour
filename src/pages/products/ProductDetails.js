@@ -18,7 +18,7 @@ export default function ProductDetails() {
     useEffect(() => {
         const fetchProductDetails = async () => {
             console.log("Calling fetch product details")
-            let response = await axios.get(BASE_URL + 'api/products/getId' + productId);
+            let response = await axios.get(BASE_URL + 'api/products/getId/' + productId);
             setProductDetails(response.data);
             console.log(response.data);
         }

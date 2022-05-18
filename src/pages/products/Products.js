@@ -1,21 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
 import axios from 'axios'
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import UsersContext from '../../contexts/UsersContext';
-// import { BASE_URL } from '../../constant/Constants';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+
 
 
 
@@ -173,33 +167,9 @@ export default function Products() {
     }
 
 
-    // renderCheckboxOption() {
-    //     let temp = [];
-    //     if (this.state.mediumOptions.medium) {
-    //         temp = this.state.mediumOptions.medium
-    //     }
-    //     if (temp) {
-    //         return temp.map(e => {
-    //             return <React.Fragment key={e.value}>
-    //                 <FormControlLabel
-    //                     control={
-    //                         <Checkbox
-    //                             name="medium"
-    //                             value={e.value}
-    //                             onChange={this.updateCheckboxes}
-    //                             checked={this.state.medium.includes(e.value)}
-    //                             sx={{ pr: 1 }}
-    //                         />
-    //                     } label={e.name}
-    //                 />
-    //             </React.Fragment>
-    //         })
-    //     }
-    //     return temp
-    // }
-
     return (
         <React.Fragment>
+
             <Typography className="lead fs-2" sx={{ ml: 2 }}>Coffee Bean Products</Typography>
             <Paper sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 'auto', m: 2 }}>
                 <InputBase
@@ -218,136 +188,110 @@ export default function Products() {
 
                 {/* other search feature */}
 
-                {/* <Paper component="form" sx={{ p: '2px 4px', width: "100%", mt: 3 }}>
-                    <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-                        <FormLabel id="checkbox-group-label">Certificate</FormLabel>
-                        <FormGroup
-                            sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-evenly" }}>
-                            {renderCheckboxOption()}
-                        </FormGroup>
-                    </FormControl>
-                </Paper>
-
-                <Paper component="form" sx={{ p: '2px 4px', width: "100%", mt: 3 }}>
-                    <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-                        <FormLabel id="checkbox-group-label">Origin</FormLabel>
-                        <FormGroup
-                            sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-evenly" }}>
-                            {renderCheckboxOption()}
-                        </FormGroup>
-                    </FormControl>
-                </Paper> */}
-
             </Paper>
-
-            <Paper sx={{ p: '2px 4px', width: "auto", minheight: "200px", m: 3 }} elevation={3} >
-                <div>
-                    <label>Text Search</label>
-                    <input type="text"
-                        placeholder="Product text search"
-                        name='product_text'
-                        onChange={onUpdateSearchFormField}
-                        value={formSearch.product_text}
-                    />
-                </div>
-                <div>
-                    <label>Select Roast Type</label>
-                    <select name="roast_type"
-                        onChange={onUpdateSearchFormField}
-                        value={formSearch.roast_type}>
-                        <option>---------</option>
-                        {roastType ? roastType.map((element, i) => {
-                            return <option key={element[1]}
-                                value={element[1]}>{element[1]}</option>
-                        }) : <option>---------</option>}
-
-                    </select>
-                </div>
-                <div>
-                    <label>Select your appetisers:</label>
-                    {
-                        certType.map(a => {
-                            return <React.Fragment key={a.id}>
-                                <input type="checkbox"
-                                    name="cert"
-                                    value={a.id}
-                                    // onChange={console.log(1)}
-                                    onClick={updateCheckboxes}
+            <Container>
+                <Row>
+                    <Col sm={12} md={4}>
+                        <Paper sx={{ p: '2px 4px', width: "auto", minheight: "200px", m: 3 }} elevation={3} >
+                            <div>
+                                <label>Text Search</label>
+                                <input type="text"
+                                    placeholder="Product text search"
+                                    name='product_text'
+                                    onChange={onUpdateSearchFormField}
+                                    value={formSearch.product_text}
                                 />
-                                <label>{a.name}</label>
-                            </React.Fragment>
-                        })
-                    }
-                </div>
+                            </div>
+                            <div>
+                                <label>Select Roast Type</label>
+                                <select name="roast_type"
+                                    onChange={onUpdateSearchFormField}
+                                    value={formSearch.roast_type}>
+                                    <option>---------</option>
+                                    {roastType ? roastType.map((element, i) => {
+                                        return <option key={element[1]}
+                                            value={element[1]}>{element[1]}</option>
+                                    }) : <option>---------</option>}
 
-                <div>
-                    <label>Min price</label>
-                    <input type="text"
-                        placeholder="Min price"
-                        name='min_price'
-                        onChange={onUpdateSearchFormField}
-                        value={formSearch.min_price}
-                    />
-                </div>
-                <div>
-                    <label>Max price</label>
-                    <input type="text"
-                        placeholder="Max price"
-                        name='max_price'
-                        onChange={onUpdateSearchFormField}
-                        value={formSearch.max_price} />
-                </div>
-                <button class="btn btn-primary" onClick={searchAllField}>Search</button>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Select your appetisers:</label>
+                                {
+                                    certType.map(a => {
+                                        return <React.Fragment key={a.id}>
+                                            <input type="checkbox"
+                                                name="cert"
+                                                value={a.id}
+                                                // onChange={console.log(1)}
+                                                onClick={updateCheckboxes}
+                                            />
+                                            <label>{a.name}</label>
+                                        </React.Fragment>
+                                    })
+                                }
+                            </div>
 
-            </Paper>
+                            <div>
+                                <label>Min price</label>
+                                <input type="text"
+                                    placeholder="Min price"
+                                    name='min_price'
+                                    onChange={onUpdateSearchFormField}
+                                    value={formSearch.min_price}
+                                />
+                            </div>
+                            <div>
+                                <label>Max price</label>
+                                <input type="text"
+                                    placeholder="Max price"
+                                    name='max_price'
+                                    onChange={onUpdateSearchFormField}
+                                    value={formSearch.max_price} />
+                            </div>
+                            <button class="btn btn-primary" onClick={searchAllField}>Search</button>
 
-            <Paper component="form" sx={{ p: '2px 4px', width: "auto", m: 3 }} elevation={3} >
-                <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-                    <FormLabel id="category-group-label">Roast Type</FormLabel>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        name="radio-buttons-group"
-                        sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-evenly" }}
-                    >
-                        {/* {renderRadioOption} */}
-                    </RadioGroup>
-                </FormControl>
-            </Paper>
-            {/* add in accordino */}
-
-            <Row xs={1} md={3} className="g-3">
-                {product ? product.map((p) => (
-                    <Col>
-                        <Card className="rounded-0" key={p.id}>
-                            <Link to={"/details/" + p.id} className="text-decoration-none text-reset">
-                                <Card.Img className="rounded-0" variant="top" src={p.image_url} key={p.image_url} />
-                                <Card.Body key={p.product_name}>
-                                    <Card.Text className="lead fs-5" >
-                                        {p.product_name} ({p.description})
-                                        <Card.Text sx={{ m: 1 }}>
-                                            ({p.price})
-                                        </Card.Text>
-                                        <Card.Text sx={{ m: 1 }}>
-                                            ({p.roastType.name})
-                                        </Card.Text>
-                                        <Card.Text sx={{ m: 1 }}>
-                                            {p.certificates.map(cert => {
-                                                return <label>{cert.name}</label>
-                                            })}
-                                        </Card.Text>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Link>
-                            <Button variant="dark"
-                                className="lead fs-5 rounded-0"
-                                value={p.id}
-                                onClick={addToCart}
-                            >Add to Cart</Button>
-                        </Card>
+                        </Paper>
                     </Col>
-                )) : <h1>Loading</h1>}
-            </Row>
+                    <Col md={8} sm={12}>
+                        <Box>
+                            <Row className="g-3">
+                                {product ? product.map((p) => (
+                                    <Col xs={12} sm={12} md={6} lg={4}>
+                                        <Card className="rounded-0" key={p.id}>
+                                            <Link to={"/details/" + p.id} className="text-decoration-none text-reset">
+                                                <Card.Img className="rounded-0" variant="top" src={p.image_url} key={p.image_url} />
+                                                <Card.Body key={p.product_name}>
+                                                    <Card.Text className="lead fs-5" >
+                                                        {p.product_name}
+                                                        <Card.Text sx={{ m: 1 }}>
+                                                            S$({parseInt(p.price) / 100})
+                                                        </Card.Text>
+                                                        <Card.Text sx={{ m: 1 }}>
+                                                            ({p.roastType.name})
+                                                        </Card.Text>
+                                                        <Card.Text sx={{ m: 1 }}>
+                                                            {p.certificates.map(cert => {
+                                                                return <label>{cert.name}</label>
+                                                            })}
+                                                        </Card.Text>
+                                                    </Card.Text>
+                                                </Card.Body>
+                                            </Link>
+                                            <Button variant="dark"
+                                                className="lead fs-5 rounded-0"
+                                                value={p.id}
+                                                onClick={addToCart}
+                                            >Add to Cart</Button>
+                                        </Card>
+                                    </Col>
+                                )) : <h1>Loading</h1>}
+                            </Row>
+                        </Box>
+                    </Col>
 
+                </Row>
+            </Container>
         </React.Fragment>
 
     )

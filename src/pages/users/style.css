@@ -1,17 +1,25 @@
-.user-login{
+.user-login-none{
     text-align: center;
     font-family: 'Open Sans', sans-serif;
     font-size: 2rem;
+    color: rgba(0, 0, 0, 0);
   }
-
+  .user-login{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
 
   .login-image{
     width: 100%;
     position: relative;
     height: 100vh;
     background-image: url(../../image/login-coffee.jpg);
+    /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
     background-size: contain;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-position: center;
     /* object-fit: contain; */
   

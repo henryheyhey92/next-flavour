@@ -13,8 +13,19 @@ export default function UsersProvider(props) {
     // const [product, setProduct] = useState([]);
     // const [addItem, setItem] = useState([]);  //for add to cart
     const [stripeKey, setStripeKey] = useState({});
+    const [loginStatus, setLoginStatus] = useState(false);
 
     const context = {
+        loginStatus: () => {
+            return loginStatus;
+        }, 
+        SignUp: async (signInReqBody) => {
+            console.log("sign up works");
+            let response = await axios.post(BASE_URL + 'api/users/register/user', signInReqBody);
+            if(response){
+                return true;
+            }
+        },
         login: async (email, password) => {
             console.log("it works");
             let response = await axios.post(BASE_URL + "api/users/login", {
@@ -27,12 +38,10 @@ export default function UsersProvider(props) {
                 localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
                 localStorage.setItem('userId', response.data.userId)
-                // setLogIn(true);
-                console.log("response data")
-                console.log(response.data)
+                setLoginStatus(true);
                 return true;
             } else {
-                // setLogIn(false);
+                setLoginStatus(false);
                 return false;
             }
 
@@ -65,10 +74,10 @@ export default function UsersProvider(props) {
                 console.log("post request to logout")
                 let response = await axios.post(BASE_URL + "api/users/logout", data)
                 if (response.data) {
-                    // setLogIn(false);
+                    setLoginStatus(false);
                     // setUserProfile({});
                     localStorage.clear()
-                    return true; //logout success
+                    // return true; //logout success
                 }
             }else{
                 return false; //no refresh token

@@ -3,6 +3,7 @@ import Cart from './pages/cart/Cart';
 // import Landing from './pages/landing/Landing';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
+import Signup from "./pages/users/Signup";
 import Profile from './pages/users/Profile';
 import ProductDetails from './pages/products/ProductDetails';
 import UsersProvider from "./contexts/UsersProvider";
@@ -29,17 +30,18 @@ function App() {
           {/* <Route path="/" element={<Landing />} /> */}
           {/* Users route */}
           {/* <Route path="/users" element={<Users />} /> */}
-          <Route path="/" element={<Users />} />
+          <Route path="/login" element={<Users />} />
           {/* Cart route */}
           <Route path="/cart" element={<Cart />} />
-          {/* Contact Us route */}
-          <Route path="/products" element={<Products />} />
+          {/* Product will be the main appearing page route */}
+          <Route path="/" element={<Products />} />
           <Route path="/details/:productId" element={<ProductDetails />} />
           <Route path="/Profile" element={<Profile />} />
           {/* route to checkout */}
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/paymentStatus/success" element={<StripePaymentSuccess />} />
           <Route path="/paymentStatus/failure" element={<StripePaymentFailure />} />
+          <Route path="/signup" element={<Signup/>} />
         </Routes>
       <FooterBar/>
       </Router>

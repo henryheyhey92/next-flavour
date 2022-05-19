@@ -71,9 +71,9 @@ export default function ProductDetails() {
                             <Card>
                                 <Card.Img className="mt-2" variant="top" src={productDetails.image_url} />
                                 <Card.Body>
-                                    <Card.Text className="lead fs-5 justify-content-center" >
+                                    <Card.Text className="font-title-enhance" >
                                         {productDetails.product_name}
-                                        <Card.Subtitle className="mb-2 text-muted">
+                                        <Card.Subtitle className="mb-2 text-muted font-title-enhance">
                                             ${parseInt(productDetails.price) / 100}
                                         </Card.Subtitle>
                                     </Card.Text>
@@ -89,20 +89,20 @@ export default function ProductDetails() {
                             {/* this is for populating cert */}
                             <Card className='m-2'>
                                 <Card.Body>
-                                    <div className='m-1'>Certificates :</div>
+                                    <div className='m-1 font-title-edit'>Certificates :</div>
                                     <ListGroup horizontal>
                                         {productDetails.certificates ? productDetails.certificates.map((cert, i) => {
-                                            return (<ListGroup.Item key={i}>{cert.name}</ListGroup.Item>)
+                                            return (<ListGroup.Item className="font-title-edit" key={i}>{cert.name}</ListGroup.Item>)
                                         }) : "Loading"}
                                     </ListGroup>
                                 </Card.Body>
                             </Card>
                             <Card className='m-2'>
                                 <Card.Body>
-                                    <div className='m-1'>Country :</div>
+                                    <div className='m-1 font-title-edit'>Country :</div>
                                     <ListGroup horizontal>
                                         {productDetails.origins ? productDetails.origins.map((ori, i) => {
-                                            return (<ListGroup.Item key={i}>{ori.country_name}</ListGroup.Item>)
+                                            return (<ListGroup.Item className="font-title-edit" key={i}>{ori.country_name}</ListGroup.Item>)
                                         }) : "Loading"}
                                     </ListGroup>
                                 </Card.Body>
@@ -110,8 +110,8 @@ export default function ProductDetails() {
 
                             <Card className='m-2'>
                                 <Card.Body>
-                                    <Card.Subtitle className="mb-2 text-muted">Product description</Card.Subtitle>
-                                    <Card.Text>
+                                    <Card.Subtitle className="mb-2 text-muted font-title-edit">Product description</Card.Subtitle>
+                                    <Card.Text className='font-title-edit'>
                                         {productDetails.description}
                                     </Card.Text>
                                 </Card.Body>

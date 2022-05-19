@@ -60,6 +60,18 @@ hr{
     align-items: center; */
 }
 
+.font-title-enhance{
+    text-align: center;
+    font-family: 'Smooch', cursive;
+    font-size: 1.9rem;
+  }
+
+.font-title-edit{
+    text-align: center;
+    font-family: 'Smooch', cursive;
+    font-size: 1.5rem;
+  }
+
 .font-title{
     text-align: center;
     font-family: 'Smooch', cursive;

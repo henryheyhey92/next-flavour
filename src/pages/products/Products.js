@@ -239,8 +239,8 @@ export default function Products() {
                                                     <Link to={"/details/" + p.id} className="text-decoration-none text-reset">
                                                         <Card.Img variant="top" src={p.image_url} key={p.image_url} />
                                                         <Card.Body key={p.product_name}>
-                                                            <Card.Title> {p.product_name}</Card.Title>
-                                                            <Card.Text>
+                                                            <Card.Title className='font-title-edit'> {p.product_name}</Card.Title>
+                                                            <Card.Text className='font-title-edit'>
                                                                 Price S$({parseInt(p.price) / 100})
                                                             </Card.Text>
 

@@ -73,4 +73,89 @@ Wireframes for mobile, desktop version
 
 ### **Surface**
 
+1. White background color with black navbar, so that the product image can be stand out and blend in easily.
 
+2. Open Sans, Smooch and fonts by default are use in the main page of the application. I personally find the two cursive font would enhance the visual and aesthetic to the look of the web application. 
+
+
+### Technologies used
+
+- [React](https://reactjs.org/)
+
+  React js is used to create the front-end framework.
+
+
+- [Axios](https://github.com/axios/axios)
+
+  Axios js is used to handle most API requests. Some static data calls with built-in fetch API.
+
+
+
+- [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)/[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+  The project relies on HTML5 and CSS technologies to create the front-end layout.
+
+
+
+- [Material UI](https://mui.com/)/[MUI Get started](https://mui.com/material-ui/getting-started/installation/)
+
+The project uses material UI for the textfield, dropdown, checkbox, radio button, form validation, mobile responsive
+
+- [Google Font](https://fonts.google.com/) and material ui typography
+
+The project uses google fonts and material ui typography for fonts
+
+- [Express](https://expressjs.com/) frame work for Nodejs
+
+-[Bookshelf](https://bookshelfjs.org/) Javascript ORM for Nodejs
+
+- [MySql](https://www.mysql.com/) For database 
+
+-[Cloudinary](https://cloudinary.com/) for upload images
+
+
+## Additional Features to be implemented in the future
+
+| Feature                      | Description                            |
+| ---------------------------- | -------------------------------------- |
+| onboarding                   | in-app tutorial animation to guide user| 
+| Search AutoComplete          | Suggestions for search autocomplete    |
+
+
+## Feature fixes to be implemented in the future
+
+| Feature                      | Description                            |
+| ---------------------------- | -------------------------------------- |
+| onboarding                   | in-app tutorial animation to guide user| 
+| Better Routing               | Using the hooks feature in react       |
+| Improve the structure of the code base  | Improve overall workflow of the codebase for Readability and better coding standard  |
+
+## Testing
+
+ The project is developed using a combination of manual testing. The testing done for the critical functionality of this project is documented at the link below:
+
+Link : [https://docs.google.com/spreadsheets/d/1F_I_k4V71amvCwd0-54xw2j1I6ho-cmw6LTu7NA9ycw/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1F_I_k4V71amvCwd0-54xw2j1I6ho-cmw6LTu7NA9ycw/edit?usp=sharing)
+
+
+## Deployment
+
+This project is deployed on Netlify and heroku. The deployed version can be found at the link below:
+
+
+Link: [https://next-flavour-coffee.netlify.app/](https://next-flavour-coffee.netlify.app/)
+
+Link: [https://hl-espresso.herokuapp.com/](https://hl-espresso.herokuapp.com/)
+
+
+# Acknowledgemnts and Credits
+
+
+* The images used in the project are from stonestreetcoffee.com and from the pexels.com
+
+* Paul's code in the react lab were used as references 
+
+* Axios cdn was used for retrieving data.
+
+* The material UI, bootstrap are used for the UI layout
+
+* all material uses in this project are for academic purposes

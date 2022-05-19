@@ -257,7 +257,7 @@ export default function Products() {
                                         onChange={onUpdateSearchFormField}
                                         value={formSearch.max_price} />
                                 </div>
-                                <button className="btn btn-primary" onClick={searchAllField}>Search</button>
+                                <button className="btn btn-dark" onClick={searchAllField}>Search</button>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -278,7 +278,7 @@ export default function Products() {
 
                                                     </Card.Body>
                                                 </Link>
-                                                <Button variant="primary"
+                                                <Button variant="dark"
                                                     value={p.id}
                                                     onClick={addToCart}>Add to Cart</Button>
                                             </Card>

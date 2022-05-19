@@ -4,7 +4,6 @@ import axios from 'axios';
 import { isExpired } from "react-jwt";
 import { BASE_URL } from '../constant/Constants';
 
-// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function UsersProvider(props) {
 

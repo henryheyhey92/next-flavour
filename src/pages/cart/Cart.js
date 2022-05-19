@@ -9,9 +9,6 @@ import Button from '@mui/material/Button';
 import './style.css';
 
 
-// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
-
-
 export default function Cart() {
     let context = useContext(UsersContext);
     let navigate = new useNavigate();

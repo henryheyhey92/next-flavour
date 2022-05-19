@@ -7,8 +7,6 @@ import './style.css'
 import UsersContext from '../../contexts/UsersContext';
 
 
-// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
-
 
 export default function Orders() {
     // const params = useParams();

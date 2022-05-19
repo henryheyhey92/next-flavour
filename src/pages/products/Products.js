@@ -29,7 +29,8 @@ export default function Products() {
         min_price: "",
         max_price: "",
         roast_type: "",
-        cert: []
+        cert: [],
+        origin: []
     })
 
     const [roastType, setRoastType] = useState([]);
@@ -53,6 +54,9 @@ export default function Products() {
             setOriginType(originRes.data);
             setProduct(response.data);
             console.log(response.data);
+            console.log("Set origin data");
+            console.log(originRes.data);
+
         }
         fetchProduct()
     }, [])
@@ -71,32 +75,32 @@ export default function Products() {
         [e.target.name]: e.target.value
     })
 
+    //back up code , not in use 
+    // const updateCheckboxes = (e) => {
 
-    const updateCheckboxes = (e) => {
+    //     if (formSearch[e.target.name].includes(e.target.value)) {
+    //         // case 1: the evt.target.value is already in the array
+    //         let indexToRemove = formSearch[e.target.name].findIndex(v => {
+    //             return v === e.target.value
+    //         })
+    //         let cloned = formSearch[e.target.name].slice();
+    //         cloned.splice(indexToRemove, 1);
+    //         setForm({
+    //             ...formSearch,
+    //             [e.target.name]: cloned
+    //         })
+    //     } else {
+    //         // case 2: the evt.target.value is not in the array
+    //         // it means: add evt.target.value to array
 
-        if (formSearch[e.target.name].includes(e.target.value)) {
-            // case 1: the evt.target.value is already in the array
-            let indexToRemove = formSearch[e.target.name].findIndex(v => {
-                return v === e.target.value
-            })
-            let cloned = formSearch[e.target.name].slice();
-            cloned.splice(indexToRemove, 1);
-            setForm({
-                ...formSearch,
-                [e.target.name]: cloned
-            })
-        } else {
-            // case 2: the evt.target.value is not in the array
-            // it means: add evt.target.value to array
-
-            let clone = formSearch[e.target.name].slice();
-            clone.push(e.target.value);
-            setForm({
-                ...formSearch,
-                [e.target.name]: clone
-            })
-        }
-    }
+    //         let clone = formSearch[e.target.name].slice();
+    //         clone.push(e.target.value);
+    //         setForm({
+    //             ...formSearch,
+    //             [e.target.name]: clone
+    //         })
+    //     }
+    // }
 
     const addToCart = async (e) => {
         //Check if access token is expired or not
@@ -143,24 +147,12 @@ export default function Products() {
                 roastTypeIdentifier = e[0]
             }
         }
-        ////
-
-        //to get the roast type index to query the coffee bean roast type id
-        // let certTypeIdentifier = [];
-        // for (let e of certType) {
-        //     if (e.name.includes(formSearch.certType)) {
-        //         certTypeIdentifier = e.name
-        //     }
-        // }
-        console.log("checkbox");
-        console.log(formSearch.cert);
-        ////
-
         const reqbody = {
-            'min_price': formSearch.min_price,
-            'max_price': formSearch.max_price,
+            'min_price': (formSearch.min_price *100),
+            'max_price': (formSearch.max_price * 100),
             'roast_type': roastTypeIdentifier,
-            'certificates': formSearch.cert
+            // 'certificates': formSearch.cert,
+            // 'origins': formSearch.origin
         }
         let response = await axios.post(BASE_URL + 'api/products/filter/by', reqbody);
         console.log(response.data);
@@ -217,8 +209,11 @@ export default function Products() {
 
                                     </select>
                                 </div>
-                                <div>
-                                    <label>Select your appetisers:</label>
+                                
+
+                                {/* backup code  */}
+                                {/* <div>
+                                    <label>Certificates:</label>
                                     {
                                         certType.map(a => {
                                             return <React.Fragment key={a.id}>
@@ -232,7 +227,23 @@ export default function Products() {
                                             </React.Fragment>
                                         })
                                     }
-                                </div>
+                                </div> */}
+                                {/* <div>
+                                    <label>Country:</label>
+                                    {
+                                        originType.map(a => {
+                                            return <React.Fragment key={a.id}>
+                                                <input type="checkbox"
+                                                    name="origin"
+                                                    value={a.id}
+                                                    // onChange={console.log(1)}
+                                                    onClick={updateCheckboxes}
+                                                />
+                                                <label>{a.country_name}</label>
+                                            </React.Fragment>
+                                        })
+                                    }
+                                </div> */}
 
                                 <div>
                                     <label>Min price</label>

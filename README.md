@@ -1,5 +1,9 @@
 # Bean-Flavour
 
+<div>
+  <img src='docImage/nex-flavour.png' style='display:block, width: 100%'><br>
+</div>
+
 ## Project Summary
 
 **Project Context**
@@ -56,7 +60,10 @@ _Non-functional requirments_
 
 ### **Structure**
 
-*
+* The following is the next-flavour coffee application structure diagram
+
+<img src='docImage/Front-end.png' style="display: block; width: 100%"><br>
+<img src='docImage/Express.png' style="display: block; width: 100%"><br>
 
 ### **Skeleton**
 

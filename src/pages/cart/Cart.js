@@ -63,7 +63,7 @@ export default function Cart() {
             setSubtractItem(response.data);
             setTimeout(function () { //Start the timer
                 setSubtractItem(false) //After 1 second, set to false
-            }, 1500)
+            }, 500)
         } else {
             //need to prom for get new access token or ask user to sign in
             let result = await context.getRefreshToken();
@@ -92,7 +92,7 @@ export default function Cart() {
             setAddItem(response.data);
             setTimeout(function () { //Start the timer
                 setAddItem(false) //After 1 second, set to false
-            }, 1500)
+            }, 500)
         } else {
             //need to prom for get new access token or ask user to sign in
             console.log("get new access token")
@@ -119,7 +119,7 @@ export default function Cart() {
         setRemoveItem(response.data);
         setTimeout(function () { //Start the timer
             setRemoveItem(false) //After 1 second, set to false
-        }, 1000)
+        }, 500)
     }
 
     const checkoutFromCart = async () => {

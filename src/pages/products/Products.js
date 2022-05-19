@@ -12,9 +12,9 @@ import UsersContext from '../../contexts/UsersContext';
 
 
 
-const BASE_URL = "https://hl-espresso.herokuapp.com/";
+// const BASE_URL = "https://hl-espresso.herokuapp.com/";
 
-// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
+const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function Products() {
 
@@ -146,6 +146,7 @@ export default function Products() {
             'min_price': (formSearch.min_price *100),
             'max_price': (formSearch.max_price * 100),
             'roast_type': roastTypeIdentifier,
+            'product_text': formSearch.product_text
             // 'certificates': formSearch.cert,
             // 'origins': formSearch.origin
         }

@@ -9,20 +9,30 @@ export default function NavbarBootStrap() {
     let navigate = useNavigate();
 
     const Logout = () => {
+        context.setOrderState(false);
         context.logout()
         navigate('/')
     }
 
     const Login = () => {
+        context.setOrderState(false);
         navigate('/login');
     }
 
     const GotoProduct = () => {
+        // context.setOrderState(false);
         navigate('/')
     }
 
     const GoToCart = () => {
+        context.setOrderState(false);
         navigate('/cart')
+    }
+
+    const GoToOrder = () => {
+        // context.setOrderState(false);
+        context.setOrderState(true);
+        navigate('/order')
     }
 
     return (
@@ -41,7 +51,7 @@ export default function NavbarBootStrap() {
                             {/* <Nav.Link className="navbar-element" href="#pricing">About Us</Nav.Link> */}
                         </Nav>
                         <Nav>
-                            {context.loginStatus() ?
+                            {localStorage.getItem('localLoginStatus') ?
                                 <Nav.Link
                                     className="navbar-element"
                                     onClick={Logout}>Logout</Nav.Link> :
@@ -55,6 +65,12 @@ export default function NavbarBootStrap() {
                                 // href="/cart"
                                 onClick={GoToCart}>
                                 <i className="fa-solid fa-cart-shopping"></i>
+                            </Nav.Link>
+                            <Nav.Link
+                                className="navbar-element"
+                                // href="/cart"
+                                onClick={GoToOrder}>
+                                Order
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

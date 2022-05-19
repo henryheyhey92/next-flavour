@@ -14,6 +14,7 @@ export default function UsersProvider(props) {
     // const [addItem, setItem] = useState([]);  //for add to cart
     const [stripeKey, setStripeKey] = useState({});
     const [loginStatus, setLoginStatus] = useState(false);
+    const [turnOrderOn, setOrderState] = useState(false);
 
     const context = {
         loginStatus: () => {
@@ -33,11 +34,10 @@ export default function UsersProvider(props) {
                 "password": password
             })
             if (response.data) {
-                console.log("response data");
-                console.log(response.data);
                 localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
-                localStorage.setItem('userId', response.data.userId)
+                localStorage.setItem('userId', response.data.userId);
+                localStorage.setItem('localLoginStatus', true);
                 setLoginStatus(true);
                 return true;
             } else {
@@ -177,6 +177,12 @@ export default function UsersProvider(props) {
         searchByText: async (reqboyObj) => {
             let response = await axios.get(BASE_URL + 'api/products/search/text', reqboyObj);
             return response
+        },
+        setOrderState: (state) => {
+            setOrderState(state);
+        },
+        getOrderState: () => {
+            return turnOrderOn
         }
 
     }

@@ -35,12 +35,6 @@ export default function Users() {
         [e.target.name]: e.target.value
     })
 
-    useEffect(() => {
-        console.log(userInfo);
-        console.log(logIn);
-
-    }, [userInfo, logIn]);
-
 
     const login = async () => {
         let result = await context.login(userInfo.email, userInfo.password);

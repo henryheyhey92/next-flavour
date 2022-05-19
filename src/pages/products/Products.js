@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
 import axios from 'axios'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UsersContext from '../../contexts/UsersContext';
 
 
@@ -37,6 +37,7 @@ export default function Products() {
     const [originType, setOriginType] = useState();
 
     let context = useContext(UsersContext);
+    const navigate = new useNavigate();
     //componment didmout
     useEffect(() => {
         const fetchProduct = async () => {
@@ -261,16 +262,19 @@ export default function Products() {
                                     return (
                                         <Col sm={12} md={6} lg={4}>
                                             <Card key={i} className='m-2'>
-                                                <Card.Img variant="top" src={p.image_url} key={p.image_url}/>
-                                                <Card.Body key={p.product_name}>
-                                                    <Card.Title> {p.product_name}</Card.Title>
-                                                    <Card.Text>
-                                                    Price S$({parseInt(p.price) / 100})
-                                                    </Card.Text>
-                                                    <Button variant="primary" 
-                                                            value={p.id}
-                                                        onClick={addToCart}>Add to Cart</Button>
-                                                </Card.Body>
+                                                <Link to={"/details/" + p.id} className="text-decoration-none text-reset">
+                                                    <Card.Img variant="top" src={p.image_url} key={p.image_url} />
+                                                    <Card.Body key={p.product_name}>
+                                                        <Card.Title> {p.product_name}</Card.Title>
+                                                        <Card.Text>
+                                                            Price S$({parseInt(p.price) / 100})
+                                                        </Card.Text>
+
+                                                    </Card.Body>
+                                                </Link>
+                                                <Button variant="primary"
+                                                    value={p.id}
+                                                    onClick={addToCart}>Add to Cart</Button>
                                             </Card>
                                         </Col>
                                     )
@@ -279,7 +283,7 @@ export default function Products() {
                         </Row>
                     </Col>
 
-                    
+
 
                 </Row>
             </Container>

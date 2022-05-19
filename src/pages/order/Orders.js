@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Card, Button, Container, ListGroup, Spinner, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
 import { BASE_URL } from '../../constant/Constants';
 import './style.css'
-import UsersContext from '../../contexts/UsersContext';
+// import UsersContext from '../../contexts/UsersContext';
 
 
 
 export default function Orders() {
     // const params = useParams();
-    let context = useContext(UsersContext);
+    // let context = useContext(UsersContext);
     let user_id = null;
     user_id = localStorage.getItem('userId');
     const [userOrdersDetails, setUserOrdersDetails] = useState([]);
@@ -23,7 +23,7 @@ export default function Orders() {
             console.log(response.data);
         }
         fetchOrderDetails();
-    }, [context.getOrderState(), user_id])
+    }, [user_id])
 
     //for progress 
     const progressInstance = (status_id) => {

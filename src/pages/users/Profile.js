@@ -3,7 +3,7 @@ import UsersContext from '../../contexts/UsersContext';
 
 export default function Profile() {
     const [userProfile, setUserProfile] = useState({});
-    const accessToken = localStorage.getItem('accessToken');
+    // const accessToken = localStorage.getItem('accessToken');
     let context = useContext(UsersContext);
 
     useEffect(()=> {
@@ -15,7 +15,8 @@ export default function Profile() {
         }
         fetchProfile();
 
-    }, [accessToken, context.loginStatus()])
+    }, [context])
+    // context.loginStatus
 
 
     return (

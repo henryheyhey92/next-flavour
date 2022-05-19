@@ -52,7 +52,7 @@ export default function ProductDetails() {
                 "user_id": localStorage.getItem('userId'),
                 'product_id': e.target.value
             }
-            let response = await axios.post(BASE_URL + 'api/shoppingCart/additem', requestBodyData, { headers });
+         await axios.post(BASE_URL + 'api/shoppingCart/additem', requestBodyData, { headers });
         } else {
             //need to prom for get new access token or ask user to sign in
             let result = await context.getRefreshToken();

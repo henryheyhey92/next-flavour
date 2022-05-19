@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
@@ -7,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
 import axios from 'axios'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import UsersContext from '../../contexts/UsersContext';
 
 
@@ -34,28 +33,23 @@ export default function Products() {
     })
 
     const [roastType, setRoastType] = useState([]);
-    const [certType, setCertType] = useState([]);
-    const [originType, setOriginType] = useState();
+    // const [certType, setCertType] = useState([]);
+    // const [originType, setOriginType] = useState();
 
     let context = useContext(UsersContext);
-    const navigate = new useNavigate();
     //componment didmout
     useEffect(() => {
         const fetchProduct = async () => {
-            console.log("roats type hahaha")
             let response = await axios.get(BASE_URL + 'api/products');
             let roastRes = await axios.get(BASE_URL + 'api/products/get/all/roast/type');
-            let certRes = await axios.get(BASE_URL + 'api/products/get/cert/type');
-            let originRes = await axios.get(BASE_URL + 'api/products/get/country/origin');
+            // let certRes = await axios.get(BASE_URL + 'api/products/get/cert/type');
+            // let originRes = await axios.get(BASE_URL + 'api/products/get/country/origin');
 
             setRoastType(roastRes.data);
-            setCertType(certRes.data);
-            // console.log(certRes.data);
-            setOriginType(originRes.data);
+            // setCertType(certRes.data);
+            // setOriginType(originRes.data);
             setProduct(response.data);
-            console.log(response.data);
-            console.log("Set origin data");
-            console.log(originRes.data);
+          
 
         }
         fetchProduct()
@@ -117,7 +111,7 @@ export default function Products() {
                 "user_id": localStorage.getItem('userId'),
                 'product_id': e.target.value
             }
-            let response = await axios.post(BASE_URL + 'api/shoppingCart/additem', requestBodyData, { headers });
+            await axios.post(BASE_URL + 'api/shoppingCart/additem', requestBodyData, { headers });
         } else {
             //need to prom for get new access token or ask user to sign in
             let result = await context.getRefreshToken();

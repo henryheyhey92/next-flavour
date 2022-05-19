@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -8,9 +8,6 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import "./style.css";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
   } from "react-router-dom";
 
@@ -27,8 +24,6 @@ export default function Users() {
         password: ""
     })
 
-    const [logIn, setLogin] = useState(false);
-
 
     const onUpdateFormField = (e) => setUser({
         ...userInfo,
@@ -38,8 +33,6 @@ export default function Users() {
 
     const login = async () => {
         let result = await context.login(userInfo.email, userInfo.password);
-        console.log(result);
-        setLogin(true);
         if (result) {
             navigate('/')
         }

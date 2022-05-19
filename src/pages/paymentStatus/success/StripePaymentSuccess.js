@@ -1,10 +1,8 @@
 import React from "react";
-import { Row, Card, Button, Container, Col, ListGroup } from 'react-bootstrap';
-import { Link, useNavigate } from "react-router-dom";
+import { Card, Container } from 'react-bootstrap';
 
 
 export default function StripePaymentSuccess() {
-  let navigate = useNavigate();
 
   return (
     <React.Fragment>

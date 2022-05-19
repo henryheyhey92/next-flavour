@@ -10,6 +10,8 @@
 
 Bean Flavour is a mobile-responsive Ecommerce web application that allows users to purchase local sg branded flavour coffee bean. Users can sign up account with Bean-flavour coffee, add items to chart, checkout item and do online payment. 
 
+Link on the express backend application: [https://github.com/henryheyhey92/espresso-express](https://github.com/henryheyhey92/espresso-express)
+
 
 **Organisational Goals**
 
@@ -105,6 +107,9 @@ The project uses material UI for the textfield, dropdown, checkbox, radio button
 
 The project uses google fonts and material ui typography for fonts
 
+
+- For the backend side of things
+
 - [Express](https://expressjs.com/) frame work for Nodejs
 
 -[Bookshelf](https://bookshelfjs.org/) Javascript ORM for Nodejs
@@ -134,7 +139,7 @@ The project uses google fonts and material ui typography for fonts
 
  The project is developed using a combination of manual testing. The testing done for the critical functionality of this project is documented at the link below:
 
-Link : [https://docs.google.com/spreadsheets/d/1F_I_k4V71amvCwd0-54xw2j1I6ho-cmw6LTu7NA9ycw/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1F_I_k4V71amvCwd0-54xw2j1I6ho-cmw6LTu7NA9ycw/edit?usp=sharing)
+Link : [https://docs.google.com/spreadsheets/d/1NW6Ly66nTHCNlksPexVr40nYznAApVdUG31xVI2ywLs/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1NW6Ly66nTHCNlksPexVr40nYznAApVdUG31xVI2ywLs/edit?usp=sharing)
 
 
 ## Deployment

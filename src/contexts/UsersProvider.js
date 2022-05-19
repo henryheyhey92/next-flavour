@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import UsersContext from './UsersContext'
 import axios from 'axios';
 import { isExpired } from "react-jwt";
-import {BASE_URL} from '../constant/Constants';
+import { BASE_URL } from '../constant/Constants';
 
 // const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function UsersProvider(props) {
-   
+
     // const [userProfile, setUserProfile] = useState({});
     // const [logIn, setLogIn] = useState(false);
     // const [product, setProduct] = useState([]);
@@ -18,11 +18,11 @@ export default function UsersProvider(props) {
     const context = {
         loginStatus: () => {
             return loginStatus;
-        }, 
+        },
         SignUp: async (signInReqBody) => {
             console.log("sign up works");
             let response = await axios.post(BASE_URL + 'api/users/register/user', signInReqBody);
-            if(response){
+            if (response) {
                 return true;
             }
         },
@@ -49,19 +49,24 @@ export default function UsersProvider(props) {
         },
 
         profile: async () => {
-            const token = localStorage.getItem("accessToken")
-            let response = await axios.get(BASE_URL + "api/users/profile", {
-                headers: {
-                    'Authorization': 'Bearer ' +token
+
+            if (loginStatus) {
+                const token = localStorage.getItem("accessToken")
+                let response = await axios.get(BASE_URL + "api/users/profile", {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+                if (response.data) {
+                    return response.data;
+                } else {
+                    // setUserProfile({})
+                    return false;
                 }
-            })
-            if (response.data) {
-                // setUserProfile(response.data);
-                return response.data;
-            } else {
-                // setUserProfile({})
+            }else{
                 return false;
             }
+
 
         },
 
@@ -69,6 +74,7 @@ export default function UsersProvider(props) {
             let data = {
                 'refreshToken': localStorage.getItem('refreshToken')
             }
+            console.log("logout context function")
             console.log(data);
             if (data) {
                 console.log("post request to logout")
@@ -76,10 +82,11 @@ export default function UsersProvider(props) {
                 if (response.data) {
                     setLoginStatus(false);
                     // setUserProfile({});
-                    localStorage.clear()
+                    localStorage.clear();
+                    console.log()
                     // return true; //logout success
                 }
-            }else{
+            } else {
                 return false; //no refresh token
             }
 
@@ -87,7 +94,7 @@ export default function UsersProvider(props) {
         product: async () => {
             let response = await axios.get(BASE_URL + 'api/products');
             // setProduct(response.data);
-            if(response.data){
+            if (response.data) {
                 return response.data
             }
         },
@@ -103,9 +110,9 @@ export default function UsersProvider(props) {
             let response = await axios.post(BASE_URL + "api/shoppingCart/additem", requestBodyData, { headers });
 
             // setItem(response.data);
-            if(response.data){
+            if (response.data) {
                 return response.data
-            }else{
+            } else {
                 //return no response data
                 return false
             }
@@ -113,11 +120,11 @@ export default function UsersProvider(props) {
         },
         checkIfAccessTokenIsExpired: async () => {
             const accessToken = localStorage.getItem('accessToken');
-            if(!accessToken){
+            if (!accessToken) {
                 //no accessToken return true
                 return true;
             }
-            try{
+            try {
                 console.log("Enter try block for check if access token is expired")
                 // true => your token is expired
                 // false => your token is not expired
@@ -126,23 +133,23 @@ export default function UsersProvider(props) {
                 console.log(isMyTokenExpired);
                 console.log(accessToken);
                 return isMyTokenExpired;
-            }catch(err){
+            } catch (err) {
                 console.log(err)
             }
         },
-        checkIfRefreshTokenIsExpired: async () =>{
+        checkIfRefreshTokenIsExpired: async () => {
             const refreshToken = localStorage.getItem('refreshToken');
-            if(!refreshToken){
+            if (!refreshToken) {
                 //no refreshToken return true
                 return true;
             }
-            try{
+            try {
                 console.log("Enter try block to check if refresh token is expired")
                 const isMyRefreshTokenExpired = isExpired(refreshToken);
                 // true => your token is expired
                 // false => your token is not expired
                 return isMyRefreshTokenExpired;
-            }catch(err){
+            } catch (err) {
                 console.log(err)
             }
         },
@@ -150,15 +157,15 @@ export default function UsersProvider(props) {
             const requestBody = {
                 "refreshToken": localStorage.getItem('refreshToken')
             }
-                let newAccessToken = await axios.post(BASE_URL + "api/users/refresh", requestBody)
-            if(newAccessToken){
+            let newAccessToken = await axios.post(BASE_URL + "api/users/refresh", requestBody)
+            if (newAccessToken) {
                 localStorage.setItem('accessToken', newAccessToken.data.accessToken)
                 return true;
-            }else{
+            } else {
                 //return false when no new access token
                 return false
             }
-            
+
         },
         setStripeKey: (keys) => {
             setStripeKey(keys);

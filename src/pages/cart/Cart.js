@@ -3,17 +3,17 @@ import UsersContext from '../../contexts/UsersContext';
 import axios from 'axios';
 // import { Card, Button } from 'react-bootstrap';
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { headers } from '../../constant/Constants';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../constant/Constants';
+import { Row, Card, Button, Container, Col, Table } from 'react-bootstrap';
+
 
 
 // const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
@@ -125,67 +125,100 @@ export default function Cart() {
             "user_id": localStorage.getItem('userId')
         }
         const headers = {
-            'Authorization': "Bearer "+ localStorage.getItem("accessToken")
+            'Authorization': "Bearer " + localStorage.getItem("accessToken")
         }
         console.log("Enter check out front function");
         console.log("user_id");
         console.log(requestBodyData);
-        let response = await axios.get(BASE_URL + "api/checkout/"+ localStorage.getItem('userId') , { headers });
+        let response = await axios.get(BASE_URL + "api/checkout/" + localStorage.getItem('userId'), { headers });
         context.setStripeKey(response.data);
-        if(response.data){
+        if (response.data) {
             navigate('/Checkout');
         }
     }
 
     return (
         <React.Fragment>
-            <Button sx={{ width: '100%', mt: 2, mb: 2 }}
-                variant="contained"
-                onClick={() => { checkoutFromCart() }}>check out</Button>
-            {(cartItems.length !== 0) ? cartItems.map(e => {
+            <Container>
+                <Button className='mt-2 mb-2'
+                    style={{ width: '100%' }}
+                    variant="primary"
+                    onClick={() => { checkoutFromCart() }}>
+                    check out
+                </Button>
+                <Table striped bordered hover size="sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>added quantity</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            {cartItems.map((e, i) => {
+                               return <td key={i}>{e.product.product_name}</td>
+                            })}
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            {cartItems.map((e, i) => {
+                               return <td key={i}>{e.product.quantity}</td>
+                            })}
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            {cartItems.map((e, i) => {
+                               return <td key={i}>{parseInt(e.product.quantity) * (parseInt(e.product.price)/100)}</td>
+                            })}
+                        </tr>
+                    </tbody>
+                </Table>
+            </Container>
+
+            {(cartItems.length !== 0) ? cartItems.map((e, i) => {
                 return (
-                    <Grid item xs={12} sm={6} md={4} key={e.id}>
-                        {/* <div><CardView sx={{m: 2}} data={e}/></div> */}
-                        <Card sx={{ minWidth: 225, m: 2 }} >
-                            <CardMedia
-                                component="img"
-                                sx={{ objectFit: "contain", height: 100, width: 100 }}
-                                image={e.product.image_url}
-                                alt="green iguana" />
-                            <CardContent sx={{ height: 200 }} key={e.product.product_name}>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {e.product.product_name}
-                                </Typography>
-                                <Typography gutterBottom variant="h5" component="div">
+                    <Container>
+                        <Card style={{ width: 'auto', }} className="justify-content-center">
+                            <Card.Img variant="top" src={e.product.image_url} />
+                            <Card.Body>
+                                <Card.Title>{e.product.product_name}</Card.Title>
+                                <Card.Text>
                                     inventory stock: {e.product.qty}
-                                </Typography>
-                                <Box sx={{ display: 'inline-flex', m: 3 }}>
-                                    <Button sx={{ mr: 1 }}
-                                        variant="contained"
-                                        size="small"
-                                        onClick={() => { decreaseQty(e.product_id) }}>-</Button>
-                                    <TextField id="outlined-basic"
-                                        label="Outlined"
-                                        variant="outlined"
-                                        size="small"
-                                        name="quantity"
-                                        value={e.quantity}
-                                        onChange={onUpdateFormField}
-                                    />
-                                    <Button sx={{ ml: 1 }}
-                                        variant="contained"
-                                        size="small"
-                                        onClick={() => { increaseQty(e.product_id) }}>+</Button>
-                                </Box>
-                                <Typography sx={{ m: 2 }} variant="body2" color="text.secondary" component="div">
-                                    {e.product.description}
-                                </Typography>
-                            </CardContent>
-                            <CardActions sx={{ mt: 2 }} key={e.price}>
-                                <Button variant="contained" size="small" value={e} onClick={() => { removeItemFromCart(e) }}>Remove item</Button>
-                            </CardActions>
+                                </Card.Text>
+                            </Card.Body>
+                            <Row>
+                                <Col xs={6}>
+                                    <Row>
+                                        <Col xs={4} className="">
+                                            <Button
+                                                variant="primary"
+                                                onClick={() => { decreaseQty(e.product_id) }}>-</Button>
+                                        </Col>
+                                        <Col xs={4}>
+                                            <Card.Text
+                                                name="quantity"
+                                                value={e.quantity}
+                                                onChange={onUpdateFormField}>
+                                                {e.quantity}
+                                            </Card.Text>
+                                        </Col>
+                                        <Col xs={4}>
+                                            <Button
+                                                variant="primary"
+                                                onClick={() => { increaseQty(e.product_id) }}>+</Button>
+                                        </Col>
+                                    </Row>
+
+                                </Col>
+                                <Col xs={6}>
+                                    <Button variant="primary" value={e} onClick={() => { removeItemFromCart(e) }}>Remove item</Button>
+                                </Col>
+                            </Row>
                         </Card>
-                    </Grid>
+                    </Container>
                 )
             }) : <h1>Loading...</h1>}
         </React.Fragment>

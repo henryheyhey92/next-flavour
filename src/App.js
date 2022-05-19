@@ -22,8 +22,9 @@ function App() {
     <UsersProvider>
       
       {/* <NavbarBootStrap /> */}
-      <Router>
       <NavbarBootStrap />
+
+      <Router>
 
         <Routes>
           {/* Landing route */}

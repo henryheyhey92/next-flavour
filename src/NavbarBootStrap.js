@@ -1,10 +1,15 @@
 import React, { useContext } from 'react'
-import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Navbar, Container, Nav, Button } from 'react-bootstrap'
 import './App.css';
 import UsersContext from './contexts/UsersContext';
 
-export default function NavbarBootStrap(props) {
+export default function NavbarBootStrap() {
     let context = useContext(UsersContext);
+
+
+    const Logout = () =>{
+        context.logout()
+    }
     return (
         <React.Fragment>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -13,21 +18,20 @@ export default function NavbarBootStrap(props) {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link className="navbar-element" href="/">Products</Nav.Link>
+                            <Button variant="dark" className="navbar-element" href="/">Products</Button>
                             {/* <Nav.Link className="navbar-element" href="#pricing">About Us</Nav.Link> */}
                         </Nav>
                         <Nav>
                             {context.loginStatus() ? 
-                            <Nav.Link className="navbar-element" 
-                                        href="/"
-                                        onClick={() => {
-                                            context.logout()
-                                        }}>Logout</Nav.Link> :
+                            <Button  variant="dark"
+                                        href="/Profile"
+                                        className="navbar-element"
+                                        onClick={Logout}>Logout</Button> :
                             <Nav.Link className="navbar-element" href="/login">Login</Nav.Link>}
                             
-                            <Nav.Link className="navbar-element" href="/cart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                </Nav.Link>
+                            <Button variant="dark" className="navbar-element" href="/cart">
+                                <i className="fa-solid fa-cart-shopping"></i>
+                                </Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

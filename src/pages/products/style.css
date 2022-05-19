@@ -1,7 +1,31 @@
-.rows{
-    border:2px solid red;
+
+
+.product-detail{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+  }
+
+  .list-tag{
+    text-decoration: none;
+    color: rgb(16, 42, 161);
+    border: 1px solid rgb(16, 42, 161);
+    display: inline-block;
+    border-radius: 2px;
+    margin: 0,5rem;
+    /* width: 60px; */
 }
 
-columns{
-    border: 2px solid black;
+.list-tag:hover{
+    color: white;
+    background-color: rgb(16, 42, 161);
+}
+
+hr{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+    background-color:#666;
+    opacity: 0.5;
 }

@@ -15,7 +15,8 @@ export default function Profile() {
         }
         fetchProfile();
 
-    }, [accessToken, context])
+    }, [accessToken, context.loginStatus()])
+
 
     return (
         <React.Fragment>

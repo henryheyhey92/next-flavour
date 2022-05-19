@@ -18,7 +18,7 @@ import {
 
 // const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
-export default function Users(props) {
+export default function Users() {
     const navigate = new useNavigate();
     let context = useContext(UsersContext);
 
@@ -82,7 +82,7 @@ export default function Users(props) {
                                     value={userInfo.password}
                                     onChange={onUpdateFormField}
                                     className="textfield-style"
-                                    type="text"
+                                    type="password"
                                     helperText
                                     sx={{ width: '100%', m: 1 }}
                                 />

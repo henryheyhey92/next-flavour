@@ -62,8 +62,8 @@ _Non-functional requirments_
 
 * The following is the next-flavour coffee application structure diagram
 
-<img src='docImage/Front-end.png' style="display: block; width: 100%"><br>
-<img src='docImage/Express.png' style="display: block; width: 100%"><br>
+<img src='docImage/Front-end.jpeg' style="display: block; width: 100%"><br>
+<img src='docImage/Express.jpeg' style="display: block; width: 100%"><br>
 
 ### **Skeleton**
 

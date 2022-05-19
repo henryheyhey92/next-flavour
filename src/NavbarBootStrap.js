@@ -43,14 +43,17 @@ export default function NavbarBootStrap() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
+
+                            {/* <Nav.Link className="navbar-element" href="#pricing">About Us</Nav.Link> */}
+                        </Nav>
+                        <Nav>
                             <Nav.Link
                                 // variant="dark" 
                                 className="navbar-element"
                                 // href="/"
-                                onClick={GotoProduct}>Products</Nav.Link>
-                            {/* <Nav.Link className="navbar-element" href="#pricing">About Us</Nav.Link> */}
-                        </Nav>
-                        <Nav>
+                                onClick={GotoProduct}>
+                                    Products
+                            </Nav.Link>
                             {localStorage.getItem('localLoginStatus') ?
                                 <Nav.Link
                                     className="navbar-element"
@@ -59,19 +62,19 @@ export default function NavbarBootStrap() {
                                     className="navbar-element"
                                     // href="/login"
                                     onClick={Login}>Login</Nav.Link>}
-
-                            <Nav.Link
-                                className="navbar-element"
-                                // href="/cart"
-                                onClick={GoToCart}>
-                                <i className="fa-solid fa-cart-shopping"></i>
-                            </Nav.Link>
                             <Nav.Link
                                 className="navbar-element"
                                 // href="/cart"
                                 onClick={GoToOrder}>
                                 Order
                             </Nav.Link>
+                            <Nav.Link
+                                className="navbar-element"
+                                // href="/cart"
+                                onClick={GoToCart}>
+                                <i className="fa-solid fa-cart-shopping"></i>
+                            </Nav.Link>
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

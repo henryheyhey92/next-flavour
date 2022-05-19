@@ -12,9 +12,7 @@ import NavbarBootStrap from "./NavbarBootStrap";
 import Checkout from "./pages/checkout/Checkout";
 import StripePaymentSuccess from "./pages/paymentStatus/success/StripePaymentSuccess";
 import StripePaymentFailure from "./pages/paymentStatus/failure/StripePaymentFailure";
-import FooterBar from "./FooterBar";
 import Orders from "./pages/order/Orders";
-// import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 
@@ -46,7 +44,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/order" element={<Orders/>} />
         </Routes>
-        <FooterBar />
       </Router>
     </UsersProvider>
   );

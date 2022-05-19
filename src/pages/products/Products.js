@@ -3,10 +3,9 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import { Typography } from '@mui/material';
 import axios from 'axios'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import UsersContext from '../../contexts/UsersContext';
 
 
@@ -50,7 +49,7 @@ export default function Products() {
             // setCertType(certRes.data);
             // setOriginType(originRes.data);
             setProduct(response.data);
-          
+
 
         }
         fetchProduct()
@@ -143,7 +142,7 @@ export default function Products() {
             }
         }
         const reqbody = {
-            'min_price': (formSearch.min_price *100),
+            'min_price': (formSearch.min_price * 100),
             'max_price': (formSearch.max_price * 100),
             'roast_type': roastTypeIdentifier,
             'product_text': formSearch.product_text
@@ -159,7 +158,7 @@ export default function Products() {
     return (
         <React.Fragment>
 
-            <Typography className="lead fs-2" sx={{ ml: 2 }}>Coffee Bean Products</Typography>
+            <div className="font-title" sx={{ ml: 2 }}>Coffee Bean Products</div>
             <Paper sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 'auto', m: 2 }}>
                 <InputBase
                     sx={{ ml: 1, flex: 1 }}
@@ -178,122 +177,90 @@ export default function Products() {
                 {/* other search feature */}
 
             </Paper>
-            <Container>
-                <Row>
-                    <Col sm={12} md={4}>
-                        <Card>
-                            <Card.Body>
-                                <div>
-                                    <label>Text Search</label>
-                                    <input type="text"
-                                        placeholder="Product text search"
-                                        name='product_text'
-                                        onChange={onUpdateSearchFormField}
-                                        value={formSearch.product_text}
-                                    />
-                                </div>
-                                <div>
-                                    <label>Select Roast Type</label>
-                                    <select name="roast_type"
-                                        onChange={onUpdateSearchFormField}
-                                        value={formSearch.roast_type}>
-                                        <option>---------</option>
-                                        {roastType ? roastType.map((element, i) => {
-                                            return <option key={element[1]}
-                                                value={element[1]}>{element[1]}</option>
-                                        }) : <option>---------</option>}
+            <div className="tree">
+                <Container >
+                    <Row>
+                        <Col sm={12} md={4}>
+                            <Card>
+                                <Card.Body>
+                                    <div className='container'>
+                                        <div>
+                                            <label>Text Search</label>
+                                            <input type="text"
+                                                placeholder="Product text search"
+                                                name='product_text'
+                                                onChange={onUpdateSearchFormField}
+                                                value={formSearch.product_text}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Select Roast Type</label>
+                                            <select name="roast_type"
+                                                onChange={onUpdateSearchFormField}
+                                                value={formSearch.roast_type}>
+                                                <option>---------</option>
+                                                {roastType ? roastType.map((element, i) => {
+                                                    return <option key={element[1]}
+                                                        value={element[1]}>{element[1]}</option>
+                                                }) : <option>---------</option>}
 
-                                    </select>
-                                </div>
-                                
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label>Min price</label>
+                                            <input type="text"
+                                                placeholder="Min price"
+                                                name='min_price'
+                                                onChange={onUpdateSearchFormField}
+                                                value={formSearch.min_price}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Max price</label>
+                                            <input type="text"
+                                                placeholder="Max price"
+                                                name='max_price'
+                                                onChange={onUpdateSearchFormField}
+                                                value={formSearch.max_price} />
+                                        </div>
+                                        <button className="btn btn-light list-tag mt-2" onClick={searchAllField}>Search</button>
 
-                                {/* backup code  */}
-                                {/* <div>
-                                    <label>Certificates:</label>
-                                    {
-                                        certType.map(a => {
-                                            return <React.Fragment key={a.id}>
-                                                <input type="checkbox"
-                                                    name="cert"
-                                                    value={a.id}
-                                                    // onChange={console.log(1)}
-                                                    onClick={updateCheckboxes}
-                                                />
-                                                <label>{a.name}</label>
-                                            </React.Fragment>
-                                        })
-                                    }
-                                </div> */}
-                                {/* <div>
-                                    <label>Country:</label>
-                                    {
-                                        originType.map(a => {
-                                            return <React.Fragment key={a.id}>
-                                                <input type="checkbox"
-                                                    name="origin"
-                                                    value={a.id}
-                                                    // onChange={console.log(1)}
-                                                    onClick={updateCheckboxes}
-                                                />
-                                                <label>{a.country_name}</label>
-                                            </React.Fragment>
-                                        })
-                                    }
-                                </div> */}
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col md={8} sm={12}>
+                            <Row>
+                                {
+                                    product.map((p, i) => {
+                                        return (
+                                            <Col sm={12} md={6} lg={4}>
+                                                <Card key={i} className='m-2'>
+                                                    <Link to={"/details/" + p.id} className="text-decoration-none text-reset">
+                                                        <Card.Img variant="top" src={p.image_url} key={p.image_url} />
+                                                        <Card.Body key={p.product_name}>
+                                                            <Card.Title> {p.product_name}</Card.Title>
+                                                            <Card.Text>
+                                                                Price S$({parseInt(p.price) / 100})
+                                                            </Card.Text>
 
-                                <div>
-                                    <label>Min price</label>
-                                    <input type="text"
-                                        placeholder="Min price"
-                                        name='min_price'
-                                        onChange={onUpdateSearchFormField}
-                                        value={formSearch.min_price}
-                                    />
-                                </div>
-                                <div>
-                                    <label>Max price</label>
-                                    <input type="text"
-                                        placeholder="Max price"
-                                        name='max_price'
-                                        onChange={onUpdateSearchFormField}
-                                        value={formSearch.max_price} />
-                                </div>
-                                <button className="btn btn-dark" onClick={searchAllField}>Search</button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={8} sm={12}>
-                        <Row>
-                            {
-                                product.map((p, i) => {
-                                    return (
-                                        <Col sm={12} md={6} lg={4}>
-                                            <Card key={i} className='m-2'>
-                                                <Link to={"/details/" + p.id} className="text-decoration-none text-reset">
-                                                    <Card.Img variant="top" src={p.image_url} key={p.image_url} />
-                                                    <Card.Body key={p.product_name}>
-                                                        <Card.Title> {p.product_name}</Card.Title>
-                                                        <Card.Text>
-                                                            Price S$({parseInt(p.price) / 100})
-                                                        </Card.Text>
+                                                        </Card.Body>
+                                                    </Link>
+                                                    <Button variant="light"
+                                                        value={p.id}
+                                                        className='list-tag'
+                                                        onClick={addToCart}>Add to Cart</Button>
+                                                </Card>
+                                            </Col>
+                                        )
+                                    })
+                                }
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
 
-                                                    </Card.Body>
-                                                </Link>
-                                                <Button variant="dark"
-                                                    value={p.id}
-                                                    onClick={addToCart}>Add to Cart</Button>
-                                            </Card>
-                                        </Col>
-                                    )
-                                })
-                            }
-                        </Row>
-                    </Col>
-
-
-
-                </Row>
-            </Container>
         </React.Fragment>
 
     )

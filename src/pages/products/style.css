@@ -8,8 +8,8 @@
 
   .list-tag{
     text-decoration: none;
-    color: rgb(16, 42, 161);
-    border: 1px solid rgb(16, 42, 161);
+    color: rgb(15, 15, 15);
+    border: 3px solid rgb(15, 15, 15);
     display: inline-block;
     border-radius: 2px;
     margin: 0,5rem;
@@ -18,7 +18,7 @@
 
 .list-tag:hover{
     color: white;
-    background-color: rgb(16, 42, 161);
+    background-color:rgb(15, 15, 15);;
 }
 
 hr{
@@ -28,4 +28,45 @@ hr{
     height: 100px;
     background-color:#666;
     opacity: 0.5;
+}
+
+.tree{
+    width: 100%;
+    position: relative;
+    height: 100vh;
+    background-image: url(../../image/bean-tree.jpg);
+    /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: center;
+    /* object-fit: contain; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.product-detail-image{
+    width: 100%;
+    position: relative;
+    height: 100vh;
+    background-image: url(../../image/product-details.jpg);
+    /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: center;
+    /* object-fit: contain; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.font-title{
+    text-align: center;
+    font-family: 'Smooch', cursive;
+    font-size: 3rem;
+  }
+
+label{
+    font-family: 'Smooch', cursive;
+    
 }

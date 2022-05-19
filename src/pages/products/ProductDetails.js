@@ -6,6 +6,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../constant/Constants';
 import './style.css'
 import UsersContext from '../../contexts/UsersContext';
+import './style.css';
 
 
 export default function ProductDetails() {
@@ -49,7 +50,7 @@ export default function ProductDetails() {
                 "user_id": localStorage.getItem('userId'),
                 'product_id': e.target.value
             }
-         await axios.post(BASE_URL + 'api/shoppingCart/additem', requestBodyData, { headers });
+            await axios.post(BASE_URL + 'api/shoppingCart/additem', requestBodyData, { headers });
         } else {
             //need to prom for get new access token or ask user to sign in
             let result = await context.getRefreshToken();
@@ -62,61 +63,64 @@ export default function ProductDetails() {
 
     return (
         <React.Fragment>
-            <h1 className='product-detail'>Product Details</h1>
-            <Container>
-                <Row >
-                    <Col sm={12} md={6}>
-                        <Card className=''>
-                            <Card.Img className="mt-2" variant="top" src={productDetails.image_url} />
-                            <Card.Body>
-                                <Card.Text className="lead fs-5 justify-content-center" >
-                                    {productDetails.product_name}
-                                    <Card.Subtitle className="mb-2 text-muted"> 
-                                    ${parseInt(productDetails.price) / 100}
-                                    </Card.Subtitle>
-                                </Card.Text>
-                            </Card.Body>
-                            <Button variant="light" 
+            <h1 className='font-title'>Product Details</h1>
+            <div className='product-detail-image'>
+                <Container>
+                    <Row >
+                        <Col sm={12} md={6}>
+                            <Card>
+                                <Card.Img className="mt-2" variant="top" src={productDetails.image_url} />
+                                <Card.Body>
+                                    <Card.Text className="lead fs-5 justify-content-center" >
+                                        {productDetails.product_name}
+                                        <Card.Subtitle className="mb-2 text-muted">
+                                            ${parseInt(productDetails.price) / 100}
+                                        </Card.Subtitle>
+                                    </Card.Text>
+                                </Card.Body>
+                                <Button variant="light"
                                     className="lead fs-5 rounded-0 list-tag"
                                     value={productId}
                                     onClick={addToCart}>Add to Cart</Button>
-                        </Card>
-                    </Col>
+                            </Card>
+                        </Col>
 
-                    <Col>
-                        {/* this is for populating cert */}
-                        <Card className='m-2'>
-                            <Card.Body>
-                                <div className='m-1'>Certificates :</div>
-                                <ListGroup horizontal>       
-                                    {productDetails.certificates? productDetails.certificates.map((cert, i) => {
-                                        return (<ListGroup.Item key={i}>{cert.name}</ListGroup.Item>)
-                                    }) : "Loading"}
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
-                        <Card className='m-2'>
-                            <Card.Body>
-                                <div className='m-1'>Country :</div>
-                                <ListGroup horizontal>
-                                    {productDetails.origins ? productDetails.origins.map((ori, i) => {
-                                        return (<ListGroup.Item key={i}>{ori.country_name}</ListGroup.Item>)
-                                    }) : "Loading"}
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
+                        <Col>
+                            {/* this is for populating cert */}
+                            <Card className='m-2'>
+                                <Card.Body>
+                                    <div className='m-1'>Certificates :</div>
+                                    <ListGroup horizontal>
+                                        {productDetails.certificates ? productDetails.certificates.map((cert, i) => {
+                                            return (<ListGroup.Item key={i}>{cert.name}</ListGroup.Item>)
+                                        }) : "Loading"}
+                                    </ListGroup>
+                                </Card.Body>
+                            </Card>
+                            <Card className='m-2'>
+                                <Card.Body>
+                                    <div className='m-1'>Country :</div>
+                                    <ListGroup horizontal>
+                                        {productDetails.origins ? productDetails.origins.map((ori, i) => {
+                                            return (<ListGroup.Item key={i}>{ori.country_name}</ListGroup.Item>)
+                                        }) : "Loading"}
+                                    </ListGroup>
+                                </Card.Body>
+                            </Card>
 
-                        <Card className='m-2'>
-                            <Card.Body>
-                                <Card.Subtitle className="mb-2 text-muted">Product description</Card.Subtitle>
-                                <Card.Text>
-                                    {productDetails.description}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+                            <Card className='m-2'>
+                                <Card.Body>
+                                    <Card.Subtitle className="mb-2 text-muted">Product description</Card.Subtitle>
+                                    <Card.Text>
+                                        {productDetails.description}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+
 
 
         </React.Fragment>

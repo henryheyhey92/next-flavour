@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Cart from './pages/cart/Cart';
 // import Landing from './pages/landing/Landing';
 import Products from './pages/products/Products';
@@ -20,12 +20,12 @@ import FooterBar from "./FooterBar";
 function App() {
   return (
     <UsersProvider>
-      
+
       {/* <NavbarBootStrap /> */}
-      <NavbarBootStrap />
+
 
       <Router>
-
+        <NavbarBootStrap />
         <Routes>
           {/* Landing route */}
           {/* <Route path="/" element={<Landing />} /> */}
@@ -39,12 +39,12 @@ function App() {
           <Route path="/details/:productId" element={<ProductDetails />} />
           <Route path="/Profile" element={<Profile />} />
           {/* route to checkout */}
-          <Route path="/checkout" element={<Checkout/>} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/paymentStatus/success" element={<StripePaymentSuccess />} />
           <Route path="/paymentStatus/failure" element={<StripePaymentFailure />} />
-          <Route path="/signup" element={<Signup/>} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
-      <FooterBar/>
+        <FooterBar />
       </Router>
     </UsersProvider>
   );

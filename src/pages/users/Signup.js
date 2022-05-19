@@ -7,13 +7,6 @@ import UsersContext from '../../contexts/UsersContext';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import "./style.css";
-import {
-    Link
-} from "react-router-dom";
-
-
-
-// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
 
 export default function Signup(props) {
     const navigate = new useNavigate();

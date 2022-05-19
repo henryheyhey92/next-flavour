@@ -1,18 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import UsersContext from '../../contexts/UsersContext';
 import axios from 'axios';
-// import { Card, Button } from 'react-bootstrap';
-import Grid from '@mui/material/Grid';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import { headers } from '../../constant/Constants';
+// import { headers } from '../../constant/Constants';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../constant/Constants';
-import { Row, Card, Button, Container, Col, Table } from 'react-bootstrap';
+import { Row, Card, Button, Container, Col, ListGroup, Badge } from 'react-bootstrap';
 
 
 
@@ -30,24 +22,24 @@ export default function Cart() {
     const [qty, setItemQuantity] = useState({
         quantity: ""
     });
-    // const [stripKeys, setStripeKey] = useSate({
-    //     'sessionId': "", // 4. Get the ID of the session
-    //     'publishableKey': ""
-    // })
-    // const userId = localStorage.getItem('userId');
-
-    //api for get shopping cart item
+    const [subTotal, setSubTotal] = useState(0)
+   
     useEffect(() => {
+        let sum = 0;
         console.log("userId");
         console.log(localStorage.getItem('userId'))
         const fetchCartItems = async () => {
             let response = await axios.get(BASE_URL + "api/shoppingCart/" + localStorage.getItem('userId'));
             console.log(response.data);
             setCartItems(response.data);
+            for (let item of cartItems) {
+                sum += (item.quantity * item.product.price) / 100
+            }
+            setSubTotal(sum);
         }
         fetchCartItems();
 
-    }, [removeCartItem, addItem, substractItem]);
+    }, [removeCartItem, addItem, substractItem, subTotal]);
 
     useEffect(() => {
         console.log(removeCartItem);
@@ -70,8 +62,17 @@ export default function Cart() {
                 "user_id": localStorage.getItem('userId'),
                 'product_id': product_id
             }
+            const headers = {
+                'Authorization': "Bearer " + localStorage.getItem("accessToken")
+            }
             let response = await axios.post(BASE_URL + "api/shoppingCart/substract", requestBodyData, { headers });
+            console.log("subtract changes")
+            console.log(response.data)
+
             setSubtractItem(response.data);
+            setTimeout(function() { //Start the timer
+                setSubtractItem(false) //After 1 second, set to false
+            }.bind(this), 1500)
         } else {
             //need to prom for get new access token or ask user to sign in
             console.log("get new access token")
@@ -87,16 +88,22 @@ export default function Cart() {
     const increaseQty = async (product_id) => {
         setAddItem();
         let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
-        console.log("is access token");
-        console.log(accessTokenNotExpired);
         if (!accessTokenNotExpired) {
             //call the profile api or cart 
             const requestBodyData = {
                 "user_id": localStorage.getItem('userId'),
                 'product_id': product_id
             }
+            const headers = {
+                'Authorization': "Bearer " + localStorage.getItem("accessToken")
+            }
+            console.log("At here headers");
+            console.log(headers);
             let response = await axios.post(BASE_URL + "api/shoppingCart/additem", requestBodyData, { headers });
             setAddItem(response.data);
+            setTimeout(function() { //Start the timer
+                setAddItem(false) //After 1 second, set to false
+            }.bind(this), 1500)
         } else {
             //need to prom for get new access token or ask user to sign in
             console.log("get new access token")
@@ -116,66 +123,90 @@ export default function Cart() {
             "product_id": removeItem.product_id,
             "cart_quantity": removeItem.quantity
         }
-        let response = await axios.post(BASE_URL + "api/shoppingCart/remove/item", requestBodyData, { headers });
-        setRemoveItem(response.data);
-    }
-
-    const checkoutFromCart = async () => {
-        const requestBodyData = {
-            "user_id": localStorage.getItem('userId')
-        }
         const headers = {
             'Authorization': "Bearer " + localStorage.getItem("accessToken")
         }
-        console.log("Enter check out front function");
-        console.log("user_id");
-        console.log(requestBodyData);
-        let response = await axios.get(BASE_URL + "api/checkout/" + localStorage.getItem('userId'), { headers });
-        context.setStripeKey(response.data);
-        if (response.data) {
-            navigate('/Checkout');
+        let response = await axios.post(BASE_URL + "api/shoppingCart/remove/item", requestBodyData, { headers });
+        setRemoveItem(response.data);
+        setTimeout(function() { //Start the timer
+            setRemoveItem(false) //After 1 second, set to false
+        }.bind(this), 1000)
+    }
+
+    const checkoutFromCart = async () => {
+
+        let accessTokenNotExpired = await context.checkIfAccessTokenIsExpired();
+        if (!accessTokenNotExpired) {
+            const requestBodyData = {
+                "user_id": localStorage.getItem('userId')
+            }
+            const headers = {
+                'Authorization': "Bearer " + localStorage.getItem("accessToken")
+            }
+            console.log(requestBodyData);
+            let response = await axios.get(BASE_URL + "api/checkout/" + localStorage.getItem('userId'), { headers });
+            context.setStripeKey(response.data);
+            if (response.data) {
+                navigate('/Checkout');
+            }
+        } else {
+            //need to prom for get new access token or ask user to sign in
+            console.log("get new access token")
+            let result = await context.getRefreshToken();
+            if (result) {
+                checkoutFromCart();
+            }
+
         }
+
+
     }
 
     return (
         <React.Fragment>
             <Container>
-                <Button className='mt-2 mb-2'
-                    style={{ width: '100%' }}
-                    variant="primary"
-                    onClick={() => { checkoutFromCart() }}>
-                    check out
-                </Button>
-                <Table striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Product</th>
-                            <th>added quantity</th>
-                            <th>Cost</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
+
+                {/* for price listing */}
+                <Card className='m-2'>
+                    <Card.Body >
+                        <ListGroup as="ol" numbered>
                             {cartItems.map((e, i) => {
-                               return <td key={i}>{e.product.product_name}</td>
+                                return <ListGroup.Item
+                                    key={i}
+                                    as="li"
+                                    className="d-flex justify-content-between align-items-start">
+                                    <div className="ms-2 me-auto">
+                                        <div className="fw-bold">{e.product.product_name}</div>
+                                        S$({e.product.price / 100})
+                                    </div>
+                                    <div className="ms-2 me-auto">
+                                        <div className="fw-bold">Qty</div>
+                                        x {e.quantity}
+                                    </div>
+                                    <div className="ms-2 me-auto">
+                                        <div className="fw-bold">Total</div>
+                                        S${(e.product.price * e.quantity) / 100}
+                                    </div>
+                                </ListGroup.Item>
                             })}
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            {cartItems.map((e, i) => {
-                               return <td key={i}>{e.product.quantity}</td>
-                            })}
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            {cartItems.map((e, i) => {
-                               return <td key={i}>{parseInt(e.product.quantity) * (parseInt(e.product.price)/100)}</td>
-                            })}
-                        </tr>
-                    </tbody>
-                </Table>
+                        </ListGroup>
+                        <ListGroup variant="flush">
+                            <ListGroup.Item className="d-flex justify-content-between flex-row-reverse">
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Cart total</div>
+                                    S$({subTotal})
+                                </div>
+                                <Button className='mt-2 mb-2'
+                                    // style={{ width: '100%' }}
+                                    variant="primary"
+                                    onClick={() => { checkoutFromCart() }}>
+                                    check out
+                                </Button>
+                            </ListGroup.Item>
+                        </ListGroup>
+                    </Card.Body>
+                </Card>
+
             </Container>
 
             {(cartItems.length !== 0) ? cartItems.map((e, i) => {

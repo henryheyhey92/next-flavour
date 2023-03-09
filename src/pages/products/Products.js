@@ -7,15 +7,12 @@ import axios from 'axios'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import UsersContext from '../../contexts/UsersContext';
+import { BASE_URL } from '../../constant/Constants';
 
 
 
 
-const BASE_URL = "https://hl-espresso.herokuapp.com/";
-
-// const BASE_URL = "https://3000-henryheyhey-espressoexp-1blfs1n110r.ws-us45.gitpod.io/"
-
-export default function Products() {
+export default function Products(props) {
 
     //state
     const [product, setProduct] = useState([]);

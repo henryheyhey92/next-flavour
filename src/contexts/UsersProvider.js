@@ -16,6 +16,9 @@ export default function UsersProvider(props) {
     const [turnOrderOn, setOrderState] = useState(false);
 
     const context = {
+        setLoginState: (toggle) => {
+            setLoginStatus(toggle);
+        },
         loginStatus: () => {
             return loginStatus;
         },
@@ -25,26 +28,6 @@ export default function UsersProvider(props) {
             if (response) {
                 return true;
             }
-        },
-        login: async (email, password) => {
-            console.log("it works");
-            let response = await axios.post(BASE_URL + "api/users/login", {
-                "email": email,
-                "password": password
-            })
-            if (response.data) {
-                localStorage.setItem('accessToken', response.data.accessToken);
-                localStorage.setItem('refreshToken', response.data.refreshToken);
-                localStorage.setItem('userId', response.data.userId);
-                localStorage.setItem('localLoginStatus', true);
-                setLoginStatus(true);
-                return true;
-            } else {
-                setLoginStatus(false);
-                return false;
-            }
-
-
         },
 
         profile: async () => {

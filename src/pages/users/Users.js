@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,11 +10,19 @@ import "./style.css";
 import {
     Link
   } from "react-router-dom";
+import { BASE_URL } from '../../constant/Constants';
+import axios from 'axios';
 
 
 export default function Users() {
+
+    useEffect(() => {
+
+    }, []);
+
     const navigate = new useNavigate();
-    let context = useContext(UsersContext);
+    const context = useContext(UsersContext);
+    const {loginStatus, setLoginState} = context;
 
     const [userInfo, setUser] = useState({
         email: "",
@@ -28,9 +36,20 @@ export default function Users() {
     })
 
 
-    const login = async () => {
-        let result = await context.login(userInfo.email, userInfo.password);
-        if (result) {
+    const handleLogin = async () => {
+        // let result = await login(userInfo.email, userInfo.password);
+        let response = await axios.post(BASE_URL + "api/users/login", {
+            "email": userInfo.email,
+            "password": userInfo.password
+        })
+        console.log("🚀 ~ file: Users.js:44 ~ handleLogin ~ response:", response)
+
+        if(response.data){
+            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem('refreshToken', response.data.refreshToken);
+            localStorage.setItem('userId', response.data.userId);
+            localStorage.setItem('localLoginStatus', true);
+            setLoginState(true);
             navigate('/')
         }
     }
@@ -74,7 +93,7 @@ export default function Users() {
                         </Grid>
                         {/* </Box> */}
                         <Box sx={{display: 'flex', flexDirection: 'column', alignContent: 'center'}}>
-                            <Button sx={{ m: 2 }} variant="contained" onClick={login}>login</Button>
+                            <Button sx={{ m: 2 }} variant="contained" onClick={handleLogin}>login</Button>
                             {/* <Button variant="contained" onClick={logout}>logout</Button> */}
                             <Box sx={{textAlign: 'center'}}><Link to={"/signup"} >No account? Click here to sign up</Link></Box>
                            

@@ -19,25 +19,14 @@ import Orders from "./pages/order/Orders";
 function App() {
   return (
     <UsersProvider>
-
-      {/* <NavbarBootStrap /> */}
-
-
       <Router>
         <NavbarBootStrap />
         <Routes>
-          {/* Landing route */}
-          {/* <Route path="/" element={<Landing />} /> */}
-          {/* Users route */}
-          {/* <Route path="/users" element={<Users />} /> */}
           <Route path="/login" element={<Users />} />
-          {/* Cart route */}
           <Route path="/cart" element={<Cart />} />
-          {/* Product will be the main appearing page route */}
           <Route path="/" element={<Products />} />
           <Route path="/details/:productId" element={<ProductDetails />} />
           <Route path="/Profile" element={<Profile />} />
-          {/* route to checkout */}
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/paymentStatus/success" element={<StripePaymentSuccess />} />
           <Route path="/paymentStatus/failure" element={<StripePaymentFailure />} />

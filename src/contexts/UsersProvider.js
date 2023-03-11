@@ -22,14 +22,6 @@ export default function UsersProvider(props) {
         loginStatus: () => {
             return loginStatus;
         },
-        SignUp: async (signInReqBody) => {
-            console.log("sign up works");
-            let response = await axios.post(BASE_URL + 'api/users/register/user', signInReqBody);
-            if (response) {
-                return true;
-            }
-        },
-
         profile: async () => {
 
             if (loginStatus) {

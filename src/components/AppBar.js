@@ -14,11 +14,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import UsersContext from '../contexts/UsersContext';
+import bean from '../image/bean.png';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export const AppBar = (props) => {
+ const NextFlavourAppBar = (props) => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -41,25 +44,11 @@ export const AppBar = (props) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+          <img src={bean} 
+              style={{width: "auto", height: "50px", objectFit: "contain"}}
+            alt="bean"/>
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -96,7 +85,7 @@ export const AppBar = (props) => {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <LocalCafeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -113,7 +102,7 @@ export const AppBar = (props) => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Next Coffee
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -162,8 +151,9 @@ export const AppBar = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({})
+export default NextFlavourAppBar;
+// const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = {}
+// const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppBar)
+// export default connect(mapStateToProps, mapDispatchToProps)(AppBar)

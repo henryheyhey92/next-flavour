@@ -47,6 +47,7 @@ export default function NavbarBootStrap() {
                             {/* <Nav.Link className="navbar-element" href="#pricing">About Us</Nav.Link> */}
                         </Nav>
                         <Nav>
+                            {/* go to the product page */}
                             <Nav.Link
                                 // variant="dark" 
                                 className="navbar-element"
@@ -54,6 +55,7 @@ export default function NavbarBootStrap() {
                                 onClick={GotoProduct}>
                                     Products
                             </Nav.Link>
+                            {/* don use local storage for login */}
                             {localStorage.getItem('localLoginStatus') ?
                                 <Nav.Link
                                     className="navbar-element"

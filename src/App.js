@@ -13,14 +13,15 @@ import Checkout from "./pages/checkout/Checkout";
 import StripePaymentSuccess from "./pages/paymentStatus/success/StripePaymentSuccess";
 import StripePaymentFailure from "./pages/paymentStatus/failure/StripePaymentFailure";
 import Orders from "./pages/order/Orders";
-
+import NextFlavourAppBar from './components/AppBar';
 
 
 function App() {
   return (
     <UsersProvider>
       <Router>
-        <NavbarBootStrap />
+        {/* <NavbarBootStrap /> */}
+        <NextFlavourAppBar/>
         <Routes>
           <Route path="/login" element={<Users />} />
           <Route path="/cart" element={<Cart />} />

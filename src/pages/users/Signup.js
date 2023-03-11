@@ -28,10 +28,9 @@ export default function Signup(props) {
         [e.target.name]: e.target.value
     })
 
-    const Signup = async () => {
-        let result = await context.SignUp(userInfo);
-        console.log(result);
-        if (result) {
+    const handleSignUp = async () => {
+        let response = await axios.post(BASE_URL + 'api/users/register/user', userInfo);
+        if (response) {
             navigate('/')
         }
     }
@@ -143,8 +142,8 @@ export default function Signup(props) {
 
                     </Grid>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center' }}>
-                        <Button sx={{ m: 2 }} variant="contained" onClick={Signup}>Sign Up</Button>
+                    <Box sx={{ display: 'flex', justifyContent: "center", alignContent: 'center' }}>
+                        <Button sx={{ m: 2 }} variant="contained" onClick={handleSignUp}>Sign Up</Button>
                     </Box>
                 </Paper>
             </Box>

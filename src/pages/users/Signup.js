@@ -7,6 +7,8 @@ import UsersContext from '../../contexts/UsersContext';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import "./style.css";
+import axios from 'axios';
+import { BASE_URL } from '../../constant/Constants';
 
 export default function Signup(props) {
     const navigate = new useNavigate();

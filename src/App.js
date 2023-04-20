@@ -14,6 +14,7 @@ import StripePaymentSuccess from "./pages/paymentStatus/success/StripePaymentSuc
 import StripePaymentFailure from "./pages/paymentStatus/failure/StripePaymentFailure";
 import Orders from "./pages/order/Orders";
 import NextFlavourAppBar from './components/AppBar';
+import Main from "./pages/main/main";
 
 
 function App() {
@@ -23,9 +24,10 @@ function App() {
         {/* <NavbarBootStrap /> */}
         <NextFlavourAppBar/>
         <Routes>
+          <Route path="/product" element={<Products />} />
+          <Route path='/' element={<Main />} />
           <Route path="/login" element={<Users />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/" element={<Products />} />
           <Route path="/details/:productId" element={<ProductDetails />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/checkout" element={<Checkout />} />

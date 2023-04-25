@@ -1,84 +1,82 @@
-
-
-.product-detail{
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 2rem;
-  }
-
-  .list-tag{
-    text-decoration: none;
-    color: rgb(15, 15, 15);
-    border: 3px solid rgb(15, 15, 15);
-    display: inline-block;
-    border-radius: 2px;
-    margin: 0,5rem;
-    /* width: 60px; */
+.product-detail {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 2rem;
 }
 
-.list-tag:hover{
-    color: white;
-    background-color:rgb(15, 15, 15);;
+.list-tag {
+  text-decoration: none;
+  color: rgb(15, 15, 15);
+  border: 3px solid rgb(15, 15, 15);
+  display: inline-block;
+  border-radius: 2px;
+  margin: 0, 5rem;
+  /* width: 60px; */
 }
 
-hr{
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100px;
-    background-color:#666;
-    opacity: 0.5;
+.list-tag:hover {
+  color: white;
+  background-color: rgb(15, 15, 15);
 }
 
-.tree{
-    width: 100%;
-    position: relative;
-    height: 100vh;
-    background-image: url(../../image/bean-tree.jpg);
-    /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
-    background-size: contain;
-    background-repeat: repeat;
-    background-position: center;
-    /* object-fit: contain; */
-    /* display: flex;
+hr {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  background-color: #666;
+  opacity: 0.5;
+}
+
+.tree {
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  background-image: url(../../image/bean-tree.jpg);
+  /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
+  background-size: contain;
+  background-repeat: repeat;
+  background-position: center;
+  /* object-fit: contain; */
+  /* display: flex;
     justify-content: center;
     align-items: center; */
 }
 
-.product-detail-image{
-    width: 100%;
-    position: relative;
-    height: 100vh;
-    background-image: url(../../image/product-details.jpg);
-    /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
-    background-size: contain;
-    background-repeat: repeat;
-    background-position: center;
-    /* object-fit: contain; */
-    /* display: flex;
+.product-detail-image {
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  background-image: url(../../image/product-details.jpg);
+  /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
+  background-size: contain;
+  background-repeat: repeat;
+  background-position: center;
+  /* object-fit: contain; */
+  /* display: flex;
     justify-content: center;
     align-items: center; */
 }
 
-.font-title-enhance{
-    text-align: center;
-    font-family: 'Smooch', cursive;
-    font-size: 1.9rem;
-  }
+.font-title-enhance {
+  text-align: center;
+  font-family: "Smooch", cursive;
+  font-size: 1.9rem;
+}
 
-.font-title-edit{
-    text-align: center;
-    font-family: 'Smooch', cursive;
-    font-size: 1.5rem;
-  }
+.font-title-edit {
+  text-align: center;
+  font-family: "Smooch", cursive;
+  font-size: 1.5rem;
+}
 
-.font-title{
-    text-align: center;
-    font-family: 'Smooch', cursive;
-    font-size: 3rem;
-  }
+.font-title {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 1.7rem;
+  font-family: "Pacifico", cursive;
+}
 
-label{
-    font-family: 'Smooch', cursive;
-    
+label {
+  font-family: "Smooch", cursive;
 }

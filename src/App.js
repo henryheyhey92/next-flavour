@@ -21,11 +21,11 @@ function App() {
   return (
     <UsersProvider>
       <Router>
-        {/* <NavbarBootStrap /> */}
-        <NextFlavourAppBar/>
+        <NavbarBootStrap />
+        {/* <NextFlavourAppBar/> */}
         <Routes>
-          <Route path="/product" element={<Products />} />
-          <Route path='/' element={<Main />} />
+          <Route path="/" element={<Products />} />
+          {/* <Route path='/' element={<Main />} /> */}
           <Route path="/login" element={<Users />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/details/:productId" element={<ProductDetails />} />

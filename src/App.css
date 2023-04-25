@@ -40,12 +40,15 @@
 .title-name{
   color: #FFFFFF;
   text-shadow: 2px 1px black;
-  font-family: 'Smooch', cursive;
   font-size: 1.7rem;
+  font-family: 'Pacifico', cursive;
 }
 
 .navbar-element{
-  font-size: 1.3rem;
+  color: #FFFFFF;
+  text-shadow: 2px 1px black;
+  font-size: 1.7rem;
+  font-family: 'Pacifico', cursive;
 }
 
 body{

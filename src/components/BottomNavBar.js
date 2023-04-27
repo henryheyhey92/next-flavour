@@ -5,6 +5,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import SearchIcon from '@mui/icons-material/Search';
 import { Typography, ThemeProvider } from "@mui/material";
 import { theme } from "./style";
 import { styled } from "@mui/material/styles";
@@ -52,7 +53,7 @@ export default function SimpleBottomNavigation(props) {
               setValue(newValue);
             }}
           >
-            <BottomNavigationAction onClick={() => handleFilter("bottom")} label="Recents" icon={<RestoreIcon />} />
+            <BottomNavigationAction onClick={() => handleFilter("bottom")} label="Search" icon={<SearchIcon />} />
             <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
             <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
           </BottomNavigation>

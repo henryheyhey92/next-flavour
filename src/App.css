@@ -39,14 +39,14 @@
 
 .title-name{
   color: #FFFFFF;
-  text-shadow: 2px 1px black;
+  /* text-shadow: 2px 1px black; */
   font-size: 1.7rem;
   font-family: 'Pacifico', cursive;
 }
 
 .navbar-element{
   color: #FFFFFF;
-  text-shadow: 2px 1px black;
+  /* text-shadow: 2px 1px black; */
   font-size: 1.7rem;
   font-family: 'Pacifico', cursive;
 }

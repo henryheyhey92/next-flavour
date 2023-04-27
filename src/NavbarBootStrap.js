@@ -40,15 +40,15 @@ export default function NavbarBootStrap() {
       <Navbar
         collapseOnSelect
         expand="lg"
-        bg="dark"
-        variant="dark"
+        bg="light"
+        // variant="light"
         style={{ position: "fixed", top: 0, width: "100%", zIndex: 99 }}
       >
         <Container>
-          <Navbar.Brand href="/" className="title-name">
+          <Navbar.Brand href="/" className="title-name" style={{color: "red"}}>
             Next Flavour
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ margin : 5}}/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               {/* <Nav.Link className="navbar-element" href="#pricing">About Us</Nav.Link> */}

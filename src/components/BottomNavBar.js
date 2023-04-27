@@ -11,8 +11,9 @@ import { styled } from "@mui/material/styles";
 
 
 
-export default function SimpleBottomNavigation() {
-  const [value, setValue] = React.useState(0);
+export default function SimpleBottomNavigation(props) {
+  const { filterCmd } = props;
+  const [value, setValue] = React.useState(null);
   const [winWidth, setWinWidth] = useState(window.innerWidth);
 
   const Responsive = styled("div")(({ theme }) => ({
@@ -20,6 +21,13 @@ export default function SimpleBottomNavigation() {
       display: "none"
     },
   }));
+  
+  const handleFilter = (data) => {
+    if(value === 0){
+      filterCmd(data);
+
+    }
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,7 +52,7 @@ export default function SimpleBottomNavigation() {
               setValue(newValue);
             }}
           >
-            <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+            <BottomNavigationAction onClick={() => handleFilter("bottom")} label="Recents" icon={<RestoreIcon />} />
             <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
             <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
           </BottomNavigation>

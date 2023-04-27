@@ -15,6 +15,7 @@ import { Typography, ThemeProvider } from "@mui/material";
 import { green, purple, red } from "@mui/material/colors";
 import { theme } from "../../components/style";
 import BottomNavBar from "../../components/BottomNavBar";
+import Filter from "../../components/Filter";
 
 const Responsive = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("sm")]: {
@@ -38,6 +39,9 @@ export default function Products(props) {
   const [textSearch, setTextSearch] = useState({
     productKeyword: "",
   });
+
+  const [anchorOne, setAnchorOne] = useState(null);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const [formSearch, setForm] = useState({
     product_text: "",
@@ -175,6 +179,17 @@ export default function Products(props) {
     );
     console.log(response.data);
     setProduct(response.data);
+  };
+
+  //trigger filter
+  const filterCmd = (data) => {
+    setAnchorOne(data);
+    setOpenDrawer(true); // open drawer
+  };
+
+  const updateDrawerState = (state) => {
+    setOpenDrawer(state);
+    setAnchorOne(null);
   };
 
   return (
@@ -331,8 +346,14 @@ export default function Products(props) {
               </Row>
             </Container>
           </div>
-          <BottomNavBar />
-
+          <BottomNavBar filterCmd={filterCmd} />
+          {openDrawer && (
+            <Filter
+              anchor={anchorOne}
+              openDrawer={openDrawer}
+              updateDrawerState={updateDrawerState}
+            />
+          )}
         </Responsive>
       </ThemeProvider>
     </React.Fragment>

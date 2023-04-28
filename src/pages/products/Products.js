@@ -30,10 +30,8 @@ const Responsive = styled("div")(({ theme }) => ({
 }));
 
 export default function Products(props) {
-  const isDesktopResolution = useMatchMedia(
-    "(min-width:575px)",
-    true
-  );
+  const isDesktopResolution = useMatchMedia("(min-width:575px)", true);
+  const isLaptopResoltion = useMatchMedia("(min-width:768px)", true);
   //state
   const [product, setProduct] = useState([]);
   const [textSearch, setTextSearch] = useState({
@@ -237,71 +235,73 @@ export default function Products(props) {
           <div>
             <Container>
               <Row>
-                {isDesktopResolution && <Col sm={12} md={4} >
-                  <Card>
-                    <Card.Body>
-                      <div className="container">
-                        <div>
-                          <label>Text Search</label>
-                          <input
-                            type="text"
-                            placeholder="Product text search"
-                            name="product_text"
-                            onChange={onUpdateSearchFormField}
-                            value={formSearch.product_text}
-                          />
-                        </div>
-                        <div>
-                          <label>Select Roast Type</label>
-                          <select
-                            name="roast_type"
-                            onChange={onUpdateSearchFormField}
-                            value={formSearch.roast_type}
-                          >
-                            <option>---------</option>
-                            {roastType ? (
-                              roastType.map((element, i) => {
-                                return (
-                                  <option key={element[1]} value={element[1]}>
-                                    {element[1]}
-                                  </option>
-                                );
-                              })
-                            ) : (
+                {isDesktopResolution && (
+                  <Col sm={12} md={4}>
+                    <Card>
+                      <Card.Body>
+                        <div className="container">
+                          <div>
+                            <label>Text Search</label>
+                            <input
+                              type="text"
+                              placeholder="Product text search"
+                              name="product_text"
+                              onChange={onUpdateSearchFormField}
+                              value={formSearch.product_text}
+                            />
+                          </div>
+                          <div>
+                            <label>Select Roast Type</label>
+                            <select
+                              name="roast_type"
+                              onChange={onUpdateSearchFormField}
+                              value={formSearch.roast_type}
+                            >
                               <option>---------</option>
-                            )}
-                          </select>
+                              {roastType ? (
+                                roastType.map((element, i) => {
+                                  return (
+                                    <option key={element[1]} value={element[1]}>
+                                      {element[1]}
+                                    </option>
+                                  );
+                                })
+                              ) : (
+                                <option>---------</option>
+                              )}
+                            </select>
+                          </div>
+                          <div>
+                            <label>Min price</label>
+                            <input
+                              type="text"
+                              placeholder="Min price"
+                              name="min_price"
+                              onChange={onUpdateSearchFormField}
+                              value={formSearch.min_price}
+                            />
+                          </div>
+                          <div>
+                            <label>Max price</label>
+                            <input
+                              type="text"
+                              placeholder="Max price"
+                              name="max_price"
+                              onChange={onUpdateSearchFormField}
+                              value={formSearch.max_price}
+                            />
+                          </div>
+                          <button
+                            className="btn btn-light list-tag mt-2"
+                            onClick={searchAllField}
+                          >
+                            Search
+                          </button>
                         </div>
-                        <div>
-                          <label>Min price</label>
-                          <input
-                            type="text"
-                            placeholder="Min price"
-                            name="min_price"
-                            onChange={onUpdateSearchFormField}
-                            value={formSearch.min_price}
-                          />
-                        </div>
-                        <div>
-                          <label>Max price</label>
-                          <input
-                            type="text"
-                            placeholder="Max price"
-                            name="max_price"
-                            onChange={onUpdateSearchFormField}
-                            value={formSearch.max_price}
-                          />
-                        </div>
-                        <button
-                          className="btn btn-light list-tag mt-2"
-                          onClick={searchAllField}
-                        >
-                          Search
-                        </button>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Col>}
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                )}
                 <Col md={8} sm={12}>
                   <Row>
                     {product.map((p, i) => {
@@ -312,11 +312,15 @@ export default function Products(props) {
                               to={"/details/" + p.id}
                               className="text-decoration-none text-reset"
                             >
+                              <div style={{maxWidth : "600px", maxHeight : "600px"}}>
                               <Card.Img
                                 variant="top"
                                 src={p.image_url}
                                 key={p.image_url}
+                                style={{ borderRadius: 25, width: "100%", height: isLaptopResoltion ? "142px" : "auto", objectFit: "fill" }}
                               />
+                              </div>
+                              
                               <Card.Body key={p.product_name}>
                                 <Card.Title className="font-title-edit">
                                   {" "}
@@ -343,8 +347,10 @@ export default function Products(props) {
                 </Col>
               </Row>
             </Container>
+            {/* add this line to increase the height */}
+            <div style={{height : "80px"}}></div>
           </div>
-          <BottomNavBar filterCmd={filterCmd} />
+            <BottomNavBar filterCmd={filterCmd} />
           {openDrawer && (
             <Filter
               anchor={anchorOne}

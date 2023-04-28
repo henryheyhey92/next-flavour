@@ -31,7 +31,7 @@ const Responsive = styled("div")(({ theme }) => ({
 
 export default function Products(props) {
   const isDesktopResolution = useMatchMedia(
-    "(min-width:500px;max-width:900px)",
+    "(min-width:575px)",
     true
   );
   //state
@@ -194,10 +194,10 @@ export default function Products(props) {
 
   return (
     <React.Fragment>
-      <div className="font-title" sx={{ ml: 2 }}>
+      <div className="font-title" style={{marginTop: 90}}>
         Coffee Bean Products
       </div>
-      <Paper
+      {/* <Paper
         sx={{
           p: "2px 4px",
           display: "flex",
@@ -222,9 +222,7 @@ export default function Products(props) {
         >
           <SearchIcon />
         </IconButton>
-
-        {/* other search feature */}
-      </Paper>
+      </Paper> */}
       {/* {isDesktopResolution && (
         <div
           style={{
@@ -236,10 +234,10 @@ export default function Products(props) {
       )} */}
       <ThemeProvider theme={theme}>
         <Responsive>
-          <div className="tree">
+          <div>
             <Container>
               <Row>
-                <Col sm={12} md={4}>
+                {isDesktopResolution && <Col sm={12} md={4} >
                   <Card>
                     <Card.Body>
                       <div className="container">
@@ -303,7 +301,7 @@ export default function Products(props) {
                       </div>
                     </Card.Body>
                   </Card>
-                </Col>
+                </Col>}
                 <Col md={8} sm={12}>
                   <Row>
                     {product.map((p, i) => {

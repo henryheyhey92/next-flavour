@@ -64,7 +64,7 @@ export default function ProductDetails() {
     return (
         <React.Fragment>
             <h1 className='font-title'>Product Details</h1>
-            <div className='product-detail-image'>
+            <div>
                 <Container>
                     <Row >
                         <Col sm={12} md={6}>

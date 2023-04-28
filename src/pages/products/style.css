@@ -29,29 +29,29 @@ hr {
 }
 
 .tree {
-  width: 100%;
+  /* width: 100%;
   position: relative;
   height: 100vh;
   background-image: url(../../image/bean-tree.jpg);
-  /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
+  background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410');
   background-size: contain;
   background-repeat: repeat;
   background-position: center;
-  /* object-fit: contain; */
-  /* display: flex;
+  object-fit: contain;
+  display: flex;
     justify-content: center;
     align-items: center; */
 }
 
 .product-detail-image {
-  width: 100%;
+  /* width: 100%;
   position: relative;
-  height: 100vh;
-  background-image: url(../../image/product-details.jpg);
+  height: 100vh; */
+  /* background-image: url(../../image/product-details.jpg); */
   /* background-image: url('//cdn.shopify.com/s/files/1/0554/7763/3189/files/3-pack-January-01_1x1.png?v=1642422410'); */
-  background-size: contain;
+  /* background-size: contain;
   background-repeat: repeat;
-  background-position: center;
+  background-position: center; */
   /* object-fit: contain; */
   /* display: flex;
     justify-content: center;

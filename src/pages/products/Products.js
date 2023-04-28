@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,7 +7,7 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import UsersContext from "../../contexts/UsersContext";
 import { BASE_URL } from "../../constant/Constants";
-import { Grid } from "@mui/material";
+import { Grid, Box, Paper } from "@mui/material";
 import { useMatchMedia } from "../../components/useMatchMedia";
 import { styled } from "@mui/material/styles";
 import { Typography, ThemeProvider } from "@mui/material";

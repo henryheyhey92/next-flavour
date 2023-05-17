@@ -58,3 +58,11 @@ body{
   max-width: 100%;
   overflow-x: hidden;
 }
+
+.MuiOutlinedInput-notchedOutline {
+  border-radius: 50px !important;
+}
+
+.MuiButton-contained {
+  border-radius: 50px !important;
+}

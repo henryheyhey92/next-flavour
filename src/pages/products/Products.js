@@ -194,41 +194,6 @@ export default function Products(props) {
       <div className="font-title" style={{marginTop: 90}}>
         Coffee Bean Products
       </div>
-      {/* <Paper
-        sx={{
-          p: "2px 4px",
-          display: "flex",
-          alignItems: "center",
-          width: "auto",
-          m: 2,
-        }}
-      >
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search"
-          inputProps={{ "aria-label": "search google maps" }}
-          name="productKeyword"
-          value={textSearch.productKeyword}
-          onChange={onUpdateFormField}
-        />
-        <IconButton
-          type="submit"
-          sx={{ p: "10px" }}
-          aria-label="search"
-          onClick={searchBytext}
-        >
-          <SearchIcon />
-        </IconButton>
-      </Paper> */}
-      {/* {isDesktopResolution && (
-        <div
-          style={{
-            backgroundColor: "green",
-            width: "auto",
-            height: "50px",
-          }}
-        ></div>
-      )} */}
       <ThemeProvider theme={theme}>
         <Responsive>
           <div>

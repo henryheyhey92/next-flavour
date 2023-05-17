@@ -80,3 +80,8 @@ hr {
 label {
   font-family: "Smooch", cursive;
 }
+
+
+.product-card {
+  border-radius: 25px 25px 0 0;
+}

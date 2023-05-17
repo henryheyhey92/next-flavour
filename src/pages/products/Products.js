@@ -306,7 +306,7 @@ export default function Products(props) {
                     {product.map((p, i) => {
                       return (
                         <Col sm={12} md={6} lg={4}>
-                          <Card key={i} className="m-2">
+                          <Card key={i} className="m-2 product-card">
                             <Link
                               to={"/details/" + p.id}
                               className="text-decoration-none text-reset"
